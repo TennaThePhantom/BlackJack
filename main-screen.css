@@ -1,26 +1,43 @@
 /* Main screen Css*/
-*{
-    margin: 0;
-    padding: 0;
-    border: none;
-    box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-sizing: border-box;
 }
-#main-screen{
-    height: 100vh;
-    width: 100%;
-    background: url(images/background/main-background.jpg) 5% 0% / cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+:root {
+	--green: #10d50d;
+	--bright-green: #2bff00;
 }
-button{
-    font-size: 1.5rem;
-    display: block;
-    margin-top: 3.5%;
-    padding: 35px 60px;
-    border: 1px solid black;
-    background-color: rgb(11, 245, 11);
-    cursor: pointer;
-    border-radius: 12px;
+#main-screen {
+	height: 100vh;
+	width: 100%;
+	background: url(images/background/main-background.jpg) 5% 0% / cover no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+button {
+	font-family: "Inconsolata", monospace;
+	font-weight: 600;
+	font-size: 1.5rem;
+	display: block;
+	margin-top: 3.5%;
+	padding: 35px 60px;
+	border: 1px solid black;
+	background-color: var(--green);
+	cursor: pointer;
+	border-radius: 12px;
+}
+
+h1 {
+	font-size: 3.4rem;
+	font-family: "Inconsolata", monospace;
+	font-weight: 600;
+	letter-spacing: 7px;
+}
+
+button:hover {
+	background-color: var(--bright-green);
 }
