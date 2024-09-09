@@ -1,16 +1,25 @@
 // handles the credits page
 const creditsButton = document.getElementById("credits-button");
-const CreateTextBox = document.createElement("div");
-const CreateText = document.createElement("p");
+const TextBox = document.createElement("div");
+const creditsText = document.createElement("p");
+const creditsHeader = document.createElement("h1");
+const collegeText = document.createElement("p");
+
 
 
 
 function creditsBody(){
-    CreateTextBox.classList.add("textBox")
-    CreateText.classList.add("credits-text");
-    CreateTextBox.append(CreateText)
-    CreateText.textContent = "Created by Tennessee Foster 9/8/2024" // change date when project is done
-    document.body.append(CreateTextBox)
+    TextBox.classList.add("textBox")
+    creditsText.classList.add("credits-text");
+    creditsHeader.classList.add("credits-header");
+    collegeText.classList.add("college-text");
+    TextBox.append(creditsText)
+    TextBox.append(creditsHeader);
+    TextBox.append(collegeText);
+    creditsHeader.textContent = "Credits";
+    creditsText.textContent = "Created by Tennessee Foster 9/8/2024" // change date when project is done
+    collegeText.textContent = "Umass Lowell Student Third Year Student";
+    document.body.append(TextBox)
 }
 
 
