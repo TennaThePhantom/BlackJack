@@ -1,5 +1,17 @@
 // handles the credits page
 const creditsButton = document.getElementById("credits-button");
+const CreateTextBox = document.createElement("div");
+const CreateText = document.createElement("p");
+
+
+
+function creditsBody(){
+    CreateTextBox.classList.add("textBox")
+    CreateText.classList.add("credits-text");
+    CreateTextBox.append(CreateText)
+    CreateText.textContent = "Created by Tennessee Foster 9/8/2024" // change date when project is done
+    document.body.append(CreateTextBox)
+}
 
 
 creditsButton.addEventListener("click", function () {
@@ -9,7 +21,10 @@ creditsButton.addEventListener("click", function () {
         button.style.display = "none";
     });
     mainScreenText.style.display = "none";
+    creditsBody();
 });
+
+
 
 
 
