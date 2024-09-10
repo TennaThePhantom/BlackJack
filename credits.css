@@ -4,35 +4,42 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-    flex-direction: column;
+	flex-direction: column;
 	position: relative;
 	left: 30%;
-    text-align: center;
+	text-align: center;
 }
 .credits-text {
-    display: block;
+	display: block;
 	font-family: "Inconsolata", monospace;
 	font-size: 2.5rem;
 	font-weight: 600;
 	font-style: italic;
 	text-align: center;
-    letter-spacing: 1.2px;
+	letter-spacing: 1.2px;
 }
 .credits-header {
 	display: block;
 	position: absolute;
 	top: 10%;
-    font-size: 4rem;
-    font-family: "Inconsolata", monospace;
+	font-size: 4rem;
+	font-family: "Inconsolata", monospace;
 }
 .college-text {
-    position: relative;
-    top: 5%;
-    font-family: "Inconsolata", monospace;
+	position: relative;
+	top: 5%;
+	font-family: "Inconsolata", monospace;
 	font-size: 2.5rem;
 	font-weight: 600;
 	font-style: italic;
 	text-align: center;
-    letter-spacing: 1.2px;
+	letter-spacing: 1.2px;
+}
 
+.left-arrow {
+	position: absolute;
+	left: 0.5%;
+	bottom: 92%;
+	font-size: 3rem;
+	cursor: pointer;
 }

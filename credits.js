@@ -6,7 +6,8 @@ const TextBox = document.createElement("div");
 const creditsText = document.createElement("p");
 const creditsHeader = document.createElement("h1");
 const collegeText = document.createElement("p");
-const goBackArrow = document.createElement("i") // <i class="fa-solid fa-arrow-left"></i> 
+const goBackArrowIcon = document.createElement("i") 
+const mainScreenDisplay = document.getElementById("main-screen");
 
 function creditsBody() {
 	TextBox.classList.add("textBox");
@@ -22,18 +23,22 @@ function creditsBody() {
 	document.body.append(TextBox);
 }
 
-function backToMainPage() {
-
+function backToMainPage() { // currently on credits page when you click arrow returns back to main page
+	goBackArrowIcon.classList.add('fa-solid', 'fa-arrow-left','left-arrow');
+	document.body.append(goBackArrowIcon)
+	goBackArrowIcon.addEventListener('click', function (){
+		TextBox.style.display = "none"; 
+		goBackArrowIcon.style.display = "none";
+		mainScreenDisplay.style.display = "flex";
+	})
 }
 
 creditsButton.addEventListener("click", function () {
-	const mainScreenButtons = document.querySelectorAll(".optionSector");
-	const mainScreenText = document.getElementById("header-text");
-	mainScreenButtons.forEach((button) => {
-		button.style.display = "none";
-	});
-	mainScreenText.style.display = "none";
+	TextBox.style.display = "flex";
+	goBackArrowIcon.style.display = "block";
+	mainScreenDisplay.style.display = "none";
 	creditsBody();
+	backToMainPage();
 });
 
 export * as credits from "./credits.js";
