@@ -1,0 +1,16 @@
+.buttonBox {
+	position: absolute;
+	height: 100%;
+	width: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.theme-button,
+.music-button {
+	position: relative;
+	left: 50%;
+	padding: 35px 60px;
+	margin: 5%;
+}
