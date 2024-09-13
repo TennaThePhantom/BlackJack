@@ -1,7 +1,8 @@
 .buttonBox {
 	position: absolute;
-	height: 100%;
+	height: 100vh;
 	width: 50%;
+	left: 25%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -10,7 +11,13 @@
 .theme-button,
 .music-button {
 	position: relative;
-	left: 50%;
+	top: 35px;
 	padding: 35px 60px;
 	margin: 5%;
+}
+.settings-header{
+	position: relative;
+	bottom: 60%;
+	font-size: 4rem;
+	font-family: 600;
 }
