@@ -1,3 +1,4 @@
+// settings is this for now until I start doing themes and music
 const settingButton = document.getElementById("settings-button");
 const themeButton = document.createElement("button");
 const musicButton = document.createElement("button");
