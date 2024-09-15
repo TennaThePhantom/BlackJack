@@ -13,6 +13,7 @@ const goBackArrowIcon = document.createElement("i");
 
 function moneyScreen() {
 	moneyBox.classList.add("money-box");
+	moneyHeader.classList.add("money-header")
 	moneyBox.append(
 		moneyHeader,
 		moneyButton1,
@@ -20,10 +21,10 @@ function moneyScreen() {
 		moneyButton3,
 		customMoney
 	);
-    moneyHeader.textContent = "How much Money do you want?"
+    moneyHeader.textContent = "How much money do you want?"
     moneyButton1.textContent = "300$"
     moneyButton2.textContent = "1000$"
-    moneyButton3.textContent = "3000"
+    moneyButton3.textContent = "3000$"
     customMoney.textContent = "Custom Amount"
 	document.body.append(moneyBox);
 }
@@ -41,6 +42,7 @@ function backToMainPage() {
 startButton.addEventListener("click", function () {
 	mainScreenDisplay.style.display = "none";
 	goBackArrowIcon.style.display = "block";
+	moneyBox.style.display = "flex";
     moneyScreen()
 	backToMainPage();
 });
