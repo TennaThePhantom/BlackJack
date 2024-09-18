@@ -1,6 +1,7 @@
 // main javascript code the home page
 import * as credits from "./credits.js";
 import * as settings from "./settings.js";
+import * as blackjack from "/blackjack.js";
 const startButton = document.getElementById("start"); // get id from start
 const moneyHeader = document.createElement("h1");
 const moneyButton1 = document.createElement("button");
@@ -10,10 +11,12 @@ const customMoney = document.createElement("button");
 const moneyBox = document.createElement("div");
 const mainScreenDisplay = document.getElementById("main-screen");
 const goBackArrowIcon = document.createElement("i");
+const goBackArrowIcon2 = document.createElement("i");
 
 function moneyScreen() {
 	moneyBox.classList.add("money-box");
-	moneyHeader.classList.add("money-header")
+	moneyHeader.classList.add("money-header");
+	customMoney.id = "custom-money";
 	moneyBox.append(
 		moneyHeader,
 		moneyButton1,
@@ -21,11 +24,11 @@ function moneyScreen() {
 		moneyButton3,
 		customMoney
 	);
-    moneyHeader.textContent = "How much money do you want?"
-    moneyButton1.textContent = "300$"
-    moneyButton2.textContent = "1000$"
-    moneyButton3.textContent = "3000$"
-    customMoney.textContent = "Custom Amount"
+	moneyHeader.textContent = "How much money do you want?";
+	moneyButton1.textContent = "300$";
+	moneyButton2.textContent = "1000$";
+	moneyButton3.textContent = "3000$";
+	customMoney.textContent = "Custom Amount";
 	document.body.append(moneyBox);
 }
 
@@ -39,10 +42,31 @@ function backToMainPage() {
 	});
 }
 
+function backToMoneyScreen() {
+	goBackArrowIcon2.classList.add("fa-solid", "fa-arrow-left", "left-arrow");
+	document.body.append(goBackArrowIcon2);
+	goBackArrowIcon2.addEventListener("click", function () {
+		moneyBox.style.display = "flex";
+		goBackArrowIcon.style.display = "flex";
+		mainScreenDisplay.style.display = "none";
+		goBackArrowIcon2.style.display = "none";
+	});
+}
+
+function customMoneyPage(){
+}
+
 startButton.addEventListener("click", function () {
 	mainScreenDisplay.style.display = "none";
 	goBackArrowIcon.style.display = "block";
 	moneyBox.style.display = "flex";
-    moneyScreen()
+	moneyScreen();
 	backToMainPage();
+});
+
+customMoney.addEventListener("click", function () {
+	moneyBox.style.display = "none";
+	goBackArrowIcon.style.display = "none";
+	goBackArrowIcon2.style.display = "Flex";
+	backToMoneyScreen();	
 });

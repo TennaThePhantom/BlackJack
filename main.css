@@ -45,3 +45,11 @@ h1 {
 button:hover {
 	background-color: var(--bright-green);
 }
+
+.left-arrow {
+	position: absolute;
+	left: 0.5%;
+	bottom: 92%;
+	font-size: 3rem;
+	cursor: pointer;
+}
