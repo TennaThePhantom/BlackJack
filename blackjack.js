@@ -1,5 +1,5 @@
 // Main game code
-const playerBankAccount = {
+export const playerBankAccount = {
 	playerMoney: 0,
 
 	updatePlayerMoney(money) {

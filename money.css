@@ -1,5 +1,5 @@
-.money-box{
-    height: 100vh;
+.money-box {
+	height: 100vh;
 	width: 50%;
 	display: flex;
 	justify-content: center;
@@ -10,8 +10,46 @@
 	text-align: center;
 }
 
-.money-header{
-    position: relative;
-    bottom: 30px;
-   font-size: 2.5rem; 
+.money-header {
+	position: relative;
+	bottom: 30px;
+	font-size: 2.5rem;
+}
+
+.slider {
+	position: relative;
+	left: 23.5%;
+	appearance: none;
+	width: 50%;
+	height: 15px;
+	border-radius: 5px;
+	background: linear-gradient(to right, #fefdfd 50%, #000000 50%);
+	outline: none;
+	opacity: 0.5;
+	transition: opacity 0.2s;
+	
+}
+.slider:hover{
+	opacity: 1;
+}
+
+.money-container {
+	position: relative;
+	top: 50%;
+	width: 100%;
+}
+
+.money-text{
+	position: absolute;
+	font-size: 2.7rem;
+	top: 50px;
+	right: 45%;
+	font-family: 600;
+}
+
+.header-money-text{
+	font-size: 2.5rem;
+	position: absolute;
+	bottom: 200px;
+	left: 20%;
 }
