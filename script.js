@@ -15,6 +15,7 @@ const goBackArrowIcon = document.createElement("i");
 const goBackArrowIcon2 = document.createElement("i");
 const moneySliderContainer = document.createElement("div");
 const slider = document.createElement("input");
+const pickMoneyButton = document.createElement("button");
 
 function moneyScreen() {
 	moneyBox.classList.add("money-box");
@@ -53,7 +54,7 @@ function backToMoneyScreen() {
 		goBackArrowIcon.style.display = "flex";
 		mainScreenDisplay.style.display = "none";
 		goBackArrowIcon2.style.display = "none";
-		moneySliderContainer.style.display = "none"
+		moneySliderContainer.style.display = "none";
 	});
 }
 
@@ -70,11 +71,13 @@ function moneySlider() {
 
 function customMoneyPage() {
 	moneySlider();
+	let value;
+	pickMoneyButton.classList.add("money-selected");
+	pickMoneyButton.textContent = "Confirm Amount";
 
 	const customMoneyHeaderText = document.createElement("h1");
-	customMoneyHeaderText.textContent = "Select how much money you want!"
-	customMoneyHeaderText.classList.add("header-money-text")
-
+	customMoneyHeaderText.textContent = "Select how much money you want!";
+	customMoneyHeaderText.classList.add("header-money-text");
 
 	const moneyText = document.createElement("p");
 	moneyText.classList.add("money-text");
@@ -89,11 +92,12 @@ function customMoneyPage() {
 	moneySliderContainer.classList.add("money-container");
 	moneySliderContainer.append(customMoneyHeaderText);
 	moneySliderContainer.append(moneyText);
+	moneySliderContainer.append(pickMoneyButton);
 	document.body.append(moneySliderContainer);
 
 	slider.oninput = function () {
 		moneyNumberText.innerHTML = this.value;
-		let value = ((this.value - this.min) / (this.max - this.min)) * 100;
+		value = ((this.value - this.min) / (this.max - this.min)) * 100;
 
 		this.style.background =
 			"linear-gradient(to right, #fefdfd " +
@@ -102,6 +106,29 @@ function customMoneyPage() {
 			value +
 			"%)";
 	};
+	pickMoneyButton.addEventListener("click", function () {
+		const confirmPopUpBox = document.createElement("div");
+		const confirmMoneyHeader = document.createElement("p");
+		const yesButton = document.createElement("button");
+		const noButton = document.createElement("button");
+
+		confirmPopUpBox.classList.add("pop-up-box");
+		confirmMoneyHeader.classList.add("confirm-money-text");
+		yesButton.classList.add("yesBtn");
+		noButton.classList.add("noBtn");
+		yesButton.textContent = "Yes";
+		noButton.textContent = "No";
+		confirmMoneyHeader.textContent = `Are you sure you want $${slider.value} to start?`;
+		confirmPopUpBox.append(confirmMoneyHeader, yesButton, noButton);
+		document.body.append(confirmPopUpBox);
+		noButton.addEventListener("click", function () {
+			confirmPopUpBox.style.display = "none";
+		});
+		yesButton.addEventListener("click", function () {
+			confirmPopUpBox.style.display = "none";
+			moneySliderContainer.style.display = "none";
+		});
+	});
 }
 
 startButton.addEventListener("click", function () {
@@ -116,7 +143,7 @@ customMoney.addEventListener("click", function () {
 	moneyBox.style.display = "none";
 	goBackArrowIcon.style.display = "none";
 	goBackArrowIcon2.style.display = "Flex";
-	moneySliderContainer.style.display = "block"
+	moneySliderContainer.style.display = "block";
 	backToMoneyScreen();
 	customMoneyPage();
 });
