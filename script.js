@@ -16,6 +16,7 @@ const goBackArrowIcon2 = document.createElement("i");
 const moneySliderContainer = document.createElement("div");
 const slider = document.createElement("input");
 const pickMoneyButton = document.createElement("button");
+const buttons = [moneyButton1, moneyButton2, moneyButton3];
 
 function moneyScreen() {
 	moneyBox.classList.add("money-box");
@@ -33,6 +34,12 @@ function moneyScreen() {
 	moneyButton2.textContent = "1000$";
 	moneyButton3.textContent = "3000$";
 	customMoney.textContent = "Custom Amount";
+	buttons.forEach(button =>{
+		button.addEventListener("click", function(){
+			moneyBox.style.display = "none";
+			goBackArrowIcon2.style.display = "none";
+		})
+	})
 	document.body.append(moneyBox);
 }
 
@@ -106,7 +113,12 @@ function customMoneyPage() {
 			value +
 			"%)";
 	};
+
+
+
 	pickMoneyButton.addEventListener("click", function () {
+		goBackArrowIcon2.style.display = "none"
+
 		const confirmPopUpBox = document.createElement("div");
 		const confirmMoneyHeader = document.createElement("p");
 		const yesButton = document.createElement("button");
@@ -122,11 +134,13 @@ function customMoneyPage() {
 		document.body.append(confirmPopUpBox);
 		noButton.addEventListener("click", function () {
 			confirmPopUpBox.style.display = "none";
+			goBackArrowIcon2.style.display = "block";
 		});
 		yesButton.addEventListener("click", function () {
 			confirmPopUpBox.style.display = "none";
 			moneySliderContainer.style.display = "none";
 			playerBankAccount.getStartingValue(slider.value);
+			goBackArrowIcon2.style.display = "none"
 		});
 	});
 }
