@@ -1,22 +1,21 @@
-.chip-box300{
-    position: absolute;
-    top: 50px;
-    height: 300px;
-    width: 500px;
-    left: 50%;
-    text-align: center;
-    
+.chips {
+	position: relative;
+	margin: 0 50px;
+	padding: 20px 0;
+	text-align: center;
+	background-color: #014d43;
+	box-shadow: 0 0 0 5px #282828 inset, 0 0 0 10px #969696 inset,
+		0 0 6px rgba(255, 255, 255, 0.2);
 }
 .pokerchip {
-    transform: scale(0.4); /* Shrinks the element to 80% of its size */
+	transform: scale(0.4); /* Shrinks the element to 80% of its size */
+	transform-origin: center; /* Ensures the element scales from its center */
 	position: relative;
 	display: inline-block;
 	width: 151px;
 	height: 151px;
 	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5), 0 0 3px 0 rgba(0, 0, 0, 0.4) inset;
 	border-radius: 50%;
-	background-size: 151px 151px;
-	background-position: center center;
 }
 .pokerchip:before {
 	position: absolute;
@@ -45,7 +44,6 @@
 	text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3),
 		1px 1px 0px rgba(255, 255, 255, 0.2);
 }
-
 
 /* Colors */
 .white {
