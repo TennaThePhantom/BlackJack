@@ -37,7 +37,7 @@ function moneyScreen() {
 	buttons.forEach(button =>{
 		button.addEventListener("click", function(){
 			moneyBox.style.display = "none";
-			goBackArrowIcon2.style.display = "none";
+			goBackArrowIcon.style.display = "none";
 		})
 	})
 	document.body.append(moneyBox);
