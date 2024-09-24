@@ -8,7 +8,7 @@
 		0 0 6px rgba(255, 255, 255, 0.2);
 }
 .pokerchip {
-	transform: scale(0.4); /* Shrinks the element to 80% of its size */
+	transform: scale(0.6); /* Shrinks the element to 80% of its size */
 	transform-origin: center; /* Ensures the element scales from its center */
 	position: relative;
 	display: inline-block;
@@ -26,7 +26,7 @@
 	border-radius: 50%;
 	top: 9px;
 	left: 9px;
-	background-size: 151px 151px;
+	background-size: 10px 151px;
 	background-position: center center;
 }
 .pokerchip:after {
@@ -410,6 +410,98 @@
 	background: #008000;
 	color: #016c00;
 }
+.yellow {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#e6b800 0,
+			#e6b800 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#e6b800 113.4304px,
+			#e6b800 151px
+		);
+}
+.yellow:before {
+	border: 8px solid #e6b800;
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			30deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			90deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			150deg,
+			#cc9900 0,
+			#cc9900 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			#cc9900 110.7104px,
+			#cc9900 151px
+		);
+}
+.yellow:after {
+	content: "50";
+	background: #e6b800;
+	color: #cc9900;
+}
+
 .black {
 	background-image: linear-gradient(
 			0deg,
@@ -500,4 +592,490 @@
 	content: "100";
 	background: #222222;
 	color: #000000;
+}
+.purple {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#800080 0,
+			#800080 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#800080 113.4304px,
+			#800080 151px
+		);
+}
+.purple:before {
+	border: 8px solid #800080;
+}
+.purple:after {
+	content: "250";
+	background: #800080;
+	color: #6c006c;
+}
+
+/* $500 Chip - Orange */
+.orange {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#ff8c00 0,
+			#ff8c00 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#ff8c00 113.4304px,
+			#ff8c00 151px
+		);
+}
+.orange:before {
+	border: 8px solid #ff8c00;
+}
+.orange:after {
+	content: "500";
+	background: #ff8c00;
+	color: #cc7a00;
+}
+
+.teal {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#03d0d3 0,
+			#03d0d3 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#03d0d3 113.4304px,
+			#03d0d3 151px
+		);
+}
+.teal:before {
+	border: 8px solid #03d0d3;
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			30deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			90deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			150deg,
+			#02a2a4 0,
+			#02a2a4 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			#02a2a4 110.7104px,
+			#02a2a4 151px
+		);
+}
+.teal:after {
+	content: "1000";
+	background: #03d0d3;
+	color: #02a2a4;
+}
+.tealgreen {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#06f9a8 0,
+			#06f9a8 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#06f9a8 113.4304px,
+			#06f9a8 151px
+		);
+}
+.tealgreen:before {
+	border: 8px solid #06f9a8;
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			30deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			90deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			150deg,
+			#03d08a 0,
+			#03d08a 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			#03d08a 110.7104px,
+			#03d08a 151px
+		);
+}
+.tealgreen:after {
+	content: "5000";
+	background: #06f9a8;
+	color: #03d08a;
+
+}
+.bronze {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#cd7f32 0,
+			#cd7f32 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#cd7f32 113.4304px,
+			#cd7f32 151px
+		);
+}
+.bronze:before {
+	border: 8px solid #cd7f32;
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			30deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			90deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			150deg,
+			#8c5738 0,
+			#8c5738 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			#8c5738 110.7104px,
+			#8c5738 151px
+		);
+}
+.bronze:after {
+	content: "10000";
+	background: #cd7f32;
+	color: #8c5738;
+	font-size: 2.5rem;
+
+}
+
+
+.silver {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#c0c0c0 0,
+			#c0c0c0 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#c0c0c0 113.4304px,
+			#c0c0c0 151px
+		);
+}
+.silver:before {
+	border: 8px solid #c0c0c0;
+}
+.silver:after {
+	content: "25000";
+	background: #c0c0c0;
+	color: #a0a0a0;
+	font-size: 2.5rem;
+}
+
+.gold {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#ffd700 0,
+			#ffd700 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#ffd700 113.4304px,
+			#ffd700 151px
+		);
+}
+.gold:before {
+	border: 8px solid #ffd700;
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			30deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			90deg,
+			transparent 0,
+			transparent 69.5px,
+			#ebebeb 69.5px,
+			#ebebeb 81.5px,
+			transparent 81.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			transparent 0,
+			transparent 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			transparent 110.7104px,
+			transparent 151px
+		),
+		linear-gradient(
+			150deg,
+			#b8860b 0,
+			#b8860b 98.7104px,
+			#ebebeb 98.7104px,
+			#ebebeb 110.7104px,
+			#b8860b 110.7104px,
+			#b8860b 151px
+		);
+}
+.gold:after {
+	content: "50000";
+	background: #ffd700;
+	color: #b8860b;
+	font-size: 2.5rem;
 }

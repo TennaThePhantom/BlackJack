@@ -1,5 +1,5 @@
 // main javascript code the home page
-import { playerBankAccount } from "./blackjack.js";
+import { chips, playerBankAccount } from "./blackjack.js";
 import * as credits from "./credits.js";
 import * as settings from "./settings.js";
 import * as blackjack from "/blackjack.js";
@@ -38,6 +38,7 @@ function moneyScreen() {
 		button.addEventListener("click", function(){
 			moneyBox.style.display = "none";
 			goBackArrowIcon.style.display = "none";
+			BlackJackGame();
 		})
 	})
 	document.body.append(moneyBox);
@@ -139,7 +140,7 @@ function customMoneyPage() {
 		yesButton.addEventListener("click", function () {
 			confirmPopUpBox.style.display = "none";
 			moneySliderContainer.style.display = "none";
-			playerBankAccount.getStartingValue(slider.value);
+			playerBankAccount.updatePlayerMoney(slider.value);
 			goBackArrowIcon2.style.display = "none"
 		});
 	});
@@ -161,3 +162,7 @@ customMoney.addEventListener("click", function () {
 	backToMoneyScreen();
 	customMoneyPage();
 });
+
+function BlackJackGame(){
+	chips()
+}

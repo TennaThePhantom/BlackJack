@@ -1,0 +1,17 @@
+.chips-container-small-rollers{
+    height: 20vh;
+    width: 100%;
+    position: absolute;
+    top: 65%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chips-container-high-rollers {
+    height: 20vh;
+    width: 100%;
+    position: absolute;
+    top: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}
