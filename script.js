@@ -8,6 +8,12 @@ const moneyHeader = document.createElement("h1");
 const moneyButton1 = document.createElement("button");
 const moneyButton2 = document.createElement("button");
 const moneyButton3 = document.createElement("button");
+let chipBox = null;
+
+moneyButton1.id = "button300";
+moneyButton2.id = "button1000";
+moneyButton3.id = "button3000";
+
 const customMoney = document.createElement("button");
 const moneyBox = document.createElement("div");
 const mainScreenDisplay = document.getElementById("main-screen");
@@ -111,7 +117,6 @@ function customMoneyPage() {
 		const confirmMoneyHeader = document.createElement("p");
 		const yesButton = document.createElement("button");
 		const noButton = document.createElement("button");
-
 		confirmPopUpBox.classList.add("pop-up-box");
 		confirmMoneyHeader.classList.add("confirm-money-text");
 		yesButton.classList.add("yesBtn");
@@ -127,6 +132,7 @@ function customMoneyPage() {
 		yesButton.addEventListener("click", function () {
 			confirmPopUpBox.style.display = "none";
 			moneySliderContainer.style.display = "none";
+			playerBankAccount.getStartingValue(slider.value);
 		});
 	});
 }

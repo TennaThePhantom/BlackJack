@@ -1,13 +1,14 @@
-.chips {
-	margin: 0 50px;
-	padding: 20px 0;
-	text-align: center;
-	background-color: #014d43;
-	box-shadow: 0 0 0 5px #282828 inset, 0 0 0 10px #969696 inset,
-		0 0 6px rgba(255, 255, 255, 0.2);
+.chip-box300{
+    position: absolute;
+    top: 50px;
+    height: 300px;
+    width: 500px;
+    left: 50%;
+    text-align: center;
+    
 }
 .pokerchip {
-	margin: 1em;
+    transform: scale(0.4); /* Shrinks the element to 80% of its size */
 	position: relative;
 	display: inline-block;
 	width: 151px;
@@ -44,10 +45,7 @@
 	text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.3),
 		1px 1px 0px rgba(255, 255, 255, 0.2);
 }
-.pokerchip:hover {
-	-webkit-animation: 2s rotate-right linear infinite;
-	animation: 2s rotate-right linear infinite;
-}
+
 
 /* Colors */
 .white {
