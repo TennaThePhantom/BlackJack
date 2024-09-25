@@ -1,5 +1,5 @@
 // main javascript code the home page
-import { chips, playerBankAccount } from "./blackjack.js";
+import { chips, playerBankAccount, pokerButtons } from "./blackjack.js";
 import * as credits from "./credits.js";
 import * as settings from "./settings.js";
 import * as blackjack from "/blackjack.js";
@@ -165,4 +165,5 @@ customMoney.addEventListener("click", function () {
 
 function BlackJackGame(){
 	chips()
+	pokerButtons();
 }

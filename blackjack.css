@@ -3,7 +3,7 @@
     width: 100%;
     position: absolute;
     top: 65%;
-    display: flex;
+    display: none;
     justify-content: space-between;
 }
 
@@ -12,6 +12,41 @@
     width: 100%;
     position: absolute;
     top: 80%;
+    display: none;
+    justify-content: space-evenly;
+}
+
+.poker-button{
+    padding: 20px 70px;
+    border: 1px solid black;
+    
+}
+
+.stand-button{
+    background-color: rgb(183, 12, 12);
+}
+.stand-button:hover{
+    background-color: red;
+}
+
+.double-button{
+    background-color: #3a1b83;
+}
+.double-button:hover{
+    background-color: #4c04f2;
+}
+.split-button{
+    background-color: #ac8020;
+}
+.split-button:hover{
+    background-color: #ffae00;
+}
+
+.blackjack-buttons-container{
+    position: absolute;
     display: flex;
     justify-content: space-evenly;
+    top: 65%;
+    height: 20vh;
+    width: 100%;
 }

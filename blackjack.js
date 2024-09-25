@@ -47,18 +47,17 @@ export function chips() {
 	const moneyChipsHighAmounts = [
 		fiveThousandDollarChip,
 		tenThousandDollarChip,
-		twentyFiveThousandDollarChip, 
-		FiftyThousandDollarChip
-	]
-	
+		twentyFiveThousandDollarChip,
+		FiftyThousandDollarChip,
+	];
 
 	moneyChipsSmallAmounts.forEach((chip) => {
 		chipsContainerSmallAmounts.append(chip);
 		chip.classList.add("pokerchip");
 	});
-	moneyChipsHighAmounts.forEach(chip => {
-		chipsContainerHighAmounts.append(chip)
-		chip.classList.add("pokerchip")
+	moneyChipsHighAmounts.forEach((chip) => {
+		chipsContainerHighAmounts.append(chip);
+		chip.classList.add("pokerchip");
 	});
 	oneDollarChip.classList.add("white");
 	fiveDollarChip.classList.add("red");
@@ -69,13 +68,36 @@ export function chips() {
 	TwoHundredFiftyDollarChip.classList.add("purple");
 	fiveHundredDollarChip.classList.add("orange");
 	thousandDollarChip.classList.add("teal");
-	fiveThousandDollarChip.classList.add("tealgreen")
-	tenThousandDollarChip.classList.add("bronze")
+	fiveThousandDollarChip.classList.add("tealgreen");
+	tenThousandDollarChip.classList.add("bronze");
 	twentyFiveThousandDollarChip.classList.add("silver");
-	FiftyThousandDollarChip.classList.add("gold")
-
+	FiftyThousandDollarChip.classList.add("gold");
 
 	document.body.append(chipsContainerSmallAmounts, chipsContainerHighAmounts);
+}
+
+export function pokerButtons() {
+	const blackJackGameButtonContainer = document.createElement("div");
+	blackJackGameButtonContainer.classList.add("blackjack-buttons-container");
+	const hitButton = document.createElement("button");
+	const standButton = document.createElement("button");
+	const doubleButton = document.createElement("button");
+	const splitButton = document.createElement("button");
+	const buttons = [hitButton, standButton, doubleButton, splitButton];
+	standButton.classList.add("stand-button");
+	doubleButton.classList.add("double-button");
+	splitButton.classList.add("split-button");
+	hitButton.textContent = "Hit"
+	standButton.textContent = "Stand"
+	doubleButton.textContent = "Double"
+	splitButton.textContent = "Split"
+
+	buttons.forEach((button) => {
+		button.classList.add("poker-button");
+		blackJackGameButtonContainer.append(button);
+	});
+
+	document.body.append(blackJackGameButtonContainer);
 }
 
 export * from "./blackjack.js";
