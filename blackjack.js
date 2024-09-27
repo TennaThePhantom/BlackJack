@@ -1,6 +1,7 @@
 // Main game code
 export const playerBankAccount = {
 	playerMoney: 0,
+	betAmount: 0,
 
 	updatePlayerMoney(money) {
 		this.playerMoney += money;
@@ -9,6 +10,18 @@ export const playerBankAccount = {
 	getStartingValue() {
 		return this.playerMoney;
 	},
+
+	updateBetAmount(bet){
+		this.betAmount += bet;
+	},
+
+	playerBetting(){
+		return this.betAmount;
+	},
+
+	resetBetAmount(){
+		this.betAmount = 0;
+	}
 };
 
 const playerHandContainer = document.createElement("div");
@@ -87,10 +100,10 @@ export function pokerButtons() {
 	standButton.classList.add("stand-button");
 	doubleButton.classList.add("double-button");
 	splitButton.classList.add("split-button");
-	hitButton.textContent = "Hit"
-	standButton.textContent = "Stand"
-	doubleButton.textContent = "Double"
-	splitButton.textContent = "Split"
+	hitButton.textContent = "Hit";
+	standButton.textContent = "Stand";
+	doubleButton.textContent = "Double";
+	splitButton.textContent = "Split";
 
 	buttons.forEach((button) => {
 		button.classList.add("poker-button");
@@ -100,4 +113,15 @@ export function pokerButtons() {
 	document.body.append(blackJackGameButtonContainer);
 }
 
+export function playerMoney() {
+	const playerMoneyContainer = document.createElement("div")
+	const playerMoneyText = document.createElement("p");
+	playerMoneyText.classList.add("player-bank")
+	playerMoneyContainer.classList.add("player-bank-container")
+	playerMoneyText.innerHTML = `Money: ${playerBankAccount.getStartingValue()}`;
+
+	playerMoneyContainer.append(playerMoneyText);
+
+	document.body.append(playerMoneyContainer)
+}
 export * from "./blackjack.js";

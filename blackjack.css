@@ -46,7 +46,20 @@
     position: absolute;
     display: flex;
     justify-content: space-evenly;
-    top: 65%;
+    top: 72.5%;
     height: 20vh;
     width: 100%;
+}
+
+.player-bank{
+    color: black;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.player-bank-container{
+    position: absolute;
+    top: 3%;
+    left: 80%;
+    height: 10vh;
 }

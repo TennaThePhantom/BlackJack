@@ -1,5 +1,10 @@
 // main javascript code the home page
-import { chips, playerBankAccount, pokerButtons } from "./blackjack.js";
+import {
+	chips,
+	playerBankAccount,
+	playerMoney,
+	pokerButtons,
+} from "./blackjack.js";
 import * as credits from "./credits.js";
 import * as settings from "./settings.js";
 import * as blackjack from "/blackjack.js";
@@ -34,13 +39,13 @@ function moneyScreen() {
 	moneyButton2.textContent = "1000$";
 	moneyButton3.textContent = "3000$";
 	customMoney.textContent = "Custom Amount";
-	buttons.forEach(button =>{
-		button.addEventListener("click", function(){
+	buttons.forEach((button) => {
+		button.addEventListener("click", function () {
 			moneyBox.style.display = "none";
 			goBackArrowIcon.style.display = "none";
 			BlackJackGame();
-		})
-	})
+		});
+	});
 	document.body.append(moneyBox);
 }
 
@@ -115,10 +120,8 @@ function customMoneyPage() {
 			"%)";
 	};
 
-
-
 	pickMoneyButton.addEventListener("click", function () {
-		goBackArrowIcon2.style.display = "none"
+		goBackArrowIcon2.style.display = "none";
 
 		const confirmPopUpBox = document.createElement("div");
 		const confirmMoneyHeader = document.createElement("p");
@@ -141,7 +144,7 @@ function customMoneyPage() {
 			confirmPopUpBox.style.display = "none";
 			moneySliderContainer.style.display = "none";
 			playerBankAccount.updatePlayerMoney(slider.value);
-			goBackArrowIcon2.style.display = "none"
+			goBackArrowIcon2.style.display = "none";
 		});
 	});
 }
@@ -163,7 +166,19 @@ customMoney.addEventListener("click", function () {
 	customMoneyPage();
 });
 
-function BlackJackGame(){
-	chips()
+function BlackJackGame() {
+	chips();
 	pokerButtons();
+	playerMoney();
 }
+
+moneyButton1.addEventListener("click", function () {
+	blackjack.playerBankAccount.updatePlayerMoney(300);
+});
+moneyButton2.addEventListener("click", function () {
+	blackjack.playerBankAccount.updatePlayerMoney(1000);
+});
+moneyButton3.addEventListener("click", function () {
+	blackjack.playerBankAccount.updatePlayerMoney(3000);
+});
+
