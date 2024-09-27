@@ -1,4 +1,6 @@
 // Main game code
+import * as pokerCards from "./cards.js";
+
 export const playerBankAccount = {
 	playerMoney: 0,
 	betAmount: 0,

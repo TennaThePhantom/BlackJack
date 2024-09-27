@@ -6,6 +6,7 @@ import {
 	pokerButtons,
 } from "./blackjack.js";
 import * as credits from "./credits.js";
+import * as pokerCards from "./cards.js";
 import * as settings from "./settings.js";
 import * as blackjack from "/blackjack.js";
 const startButton = document.getElementById("start"); // get id from start
@@ -182,3 +183,4 @@ moneyButton3.addEventListener("click", function () {
 	blackjack.playerBankAccount.updatePlayerMoney(3000);
 });
 
+console.log(pokerCards.cardDeck.getCards)
