@@ -63,3 +63,33 @@
     left: 80%;
     height: 10vh;
 }
+
+.black-jack-dealer-hand{
+    position: absolute;
+    left: 30%;
+    top: 3%;
+    height: 30vh;
+    width: 30%;
+    background-color: black;
+
+}
+
+.black-jack-player-hand{
+    position: absolute;
+    left: 30%;
+    top: 45%;
+    height: 30vh;
+    width: 30%;
+    background-color: black;
+}
+
+.poker-card-back{
+    position: absolute;
+    left: 20%;
+    top: 27.5%;
+    height: 150px;
+    width: 150px;
+}
+.playing-cards{
+
+}

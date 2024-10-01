@@ -32,6 +32,8 @@ const splitButton = document.createElement("button");
 const blackJackCardDeck = pokerCards.cardDeck;
 const playerHandContainer = document.createElement("div");
 const dealerHandContainer = document.createElement("div");
+const deckOfCards = document.createElement("img")
+
 blackJackCardDeck.getCards();
 
 export function chips() {
@@ -139,6 +141,15 @@ export function BlackJackHitButton() {
 		console.log(randomCard);
 		console.log(cardSrc);
 	});
+}
+
+export function cardsHands(){
+	deckOfCards.classList.add("poker-card-back")
+	deckOfCards.src = "images/Regular-Game-Cards/pokercard-back.png"
+	playerHandContainer.classList.add("black-jack-player-hand");
+	dealerHandContainer.classList.add("black-jack-dealer-hand");
+	document.body.append(playerHandContainer, dealerHandContainer, deckOfCards)
+	
 }
 
 export * from "./blackjack.js";
