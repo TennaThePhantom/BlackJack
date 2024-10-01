@@ -1,5 +1,6 @@
 // main javascript code the home page
 import {
+	BlackJackHitButton,
 	chips,
 	playerBankAccount,
 	playerMoney,
@@ -171,6 +172,9 @@ function BlackJackGame() {
 	chips();
 	pokerButtons();
 	playerMoney();
+	setTimeout(() => {
+		BlackJackHitButton();
+	}, 1000);
 }
 
 moneyButton1.addEventListener("click", function () {
@@ -182,5 +186,3 @@ moneyButton2.addEventListener("click", function () {
 moneyButton3.addEventListener("click", function () {
 	blackjack.playerBankAccount.updatePlayerMoney(3000);
 });
-
-console.log(pokerCards.cardDeck.getCards)

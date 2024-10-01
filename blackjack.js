@@ -13,21 +13,26 @@ export const playerBankAccount = {
 		return this.playerMoney;
 	},
 
-	updateBetAmount(bet){
+	updateBetAmount(bet) {
 		this.betAmount += bet;
 	},
 
-	playerBetting(){
+	playerBetting() {
 		return this.betAmount;
 	},
 
-	resetBetAmount(){
+	resetBetAmount() {
 		this.betAmount = 0;
-	}
+	},
 };
-
+const hitButton = document.createElement("button");
+const standButton = document.createElement("button");
+const doubleButton = document.createElement("button");
+const splitButton = document.createElement("button");
+const blackJackCardDeck = pokerCards.cardDeck;
 const playerHandContainer = document.createElement("div");
 const dealerHandContainer = document.createElement("div");
+blackJackCardDeck.getCards();
 
 export function chips() {
 	const chipsContainerSmallAmounts = document.createElement("div");
@@ -94,11 +99,11 @@ export function chips() {
 export function pokerButtons() {
 	const blackJackGameButtonContainer = document.createElement("div");
 	blackJackGameButtonContainer.classList.add("blackjack-buttons-container");
-	const hitButton = document.createElement("button");
-	const standButton = document.createElement("button");
-	const doubleButton = document.createElement("button");
-	const splitButton = document.createElement("button");
 	const buttons = [hitButton, standButton, doubleButton, splitButton];
+	hitButton.id = "hit";
+	standButton.id = "stand";
+	splitButton.id = "split";
+	doubleButton.id = "double";
 	standButton.classList.add("stand-button");
 	doubleButton.classList.add("double-button");
 	splitButton.classList.add("split-button");
@@ -116,14 +121,24 @@ export function pokerButtons() {
 }
 
 export function playerMoney() {
-	const playerMoneyContainer = document.createElement("div")
+	const playerMoneyContainer = document.createElement("div");
 	const playerMoneyText = document.createElement("p");
-	playerMoneyText.classList.add("player-bank")
-	playerMoneyContainer.classList.add("player-bank-container")
+	playerMoneyText.classList.add("player-bank");
+	playerMoneyContainer.classList.add("player-bank-container");
 	playerMoneyText.innerHTML = `Money: ${playerBankAccount.getStartingValue()}`;
 
 	playerMoneyContainer.append(playerMoneyText);
 
-	document.body.append(playerMoneyContainer)
+	document.body.append(playerMoneyContainer);
 }
+
+export function BlackJackHitButton() {
+	hitButton.addEventListener("click", function () {
+		let randomCard = blackJackCardDeck.getRandomCard();
+		let cardSrc = randomCard.src;
+		console.log(randomCard);
+		console.log(cardSrc);
+	});
+}
+
 export * from "./blackjack.js";
