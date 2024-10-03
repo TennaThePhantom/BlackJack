@@ -1,95 +1,102 @@
-.chips-container-small-rollers{
-    height: 20vh;
-    width: 100%;
-    position: absolute;
-    top: 65%;
-    display: none;
-    justify-content: space-between;
+.chips-container-small-rollers {
+	height: 20vh;
+	width: 100%;
+	position: absolute;
+	top: 65%;
+	display: none;
+	justify-content: space-between;
 }
 
 .chips-container-high-rollers {
-    height: 20vh;
-    width: 100%;
-    position: absolute;
-    top: 80%;
-    display: none;
-    justify-content: space-evenly;
+	height: 20vh;
+	width: 100%;
+	position: absolute;
+	top: 80%;
+	display: none;
+	justify-content: space-evenly;
 }
 
-.poker-button{
-    padding: 20px 70px;
-    border: 1px solid black;
-    
+.poker-button {
+	padding: 20px 70px;
+	border: 1px solid black;
 }
 
-.stand-button{
-    background-color: rgb(183, 12, 12);
+.stand-button {
+	background-color: rgb(183, 12, 12);
 }
-.stand-button:hover{
-    background-color: red;
-}
-
-.double-button{
-    background-color: #3a1b83;
-}
-.double-button:hover{
-    background-color: #4c04f2;
-}
-.split-button{
-    background-color: #ac8020;
-}
-.split-button:hover{
-    background-color: #ffae00;
+.stand-button:hover {
+	background-color: red;
 }
 
-.blackjack-buttons-container{
-    position: absolute;
-    display: flex;
-    justify-content: space-evenly;
-    top: 72.5%;
-    height: 20vh;
-    width: 100%;
+.double-button {
+	background-color: #3a1b83;
+}
+.double-button:hover {
+	background-color: #4c04f2;
+}
+.split-button {
+	background-color: #ac8020;
+}
+.split-button:hover {
+	background-color: #ffae00;
 }
 
-.player-bank{
-    color: black;
-    font-size: 3rem;
-    font-weight: 600;
+.blackjack-buttons-container {
+	position: absolute;
+	display: flex;
+	justify-content: space-evenly;
+	top: 72.5%;
+	height: 20vh;
+	width: 100%;
 }
 
-.player-bank-container{
-    position: absolute;
-    top: 3%;
-    left: 80%;
-    height: 10vh;
+.player-bank {
+	color: black;
+	font-size: 3rem;
+	font-weight: 600;
 }
 
-.black-jack-dealer-hand{
-    position: absolute;
-    left: 30%;
-    top: 3%;
-    height: 30vh;
-    width: 30%;
-    background-color: black;
-
+.player-bank-container {
+	position: absolute;
+	top: 3%;
+	left: 80%;
+	height: 10vh;
 }
 
-.black-jack-player-hand{
-    position: absolute;
-    left: 30%;
-    top: 45%;
-    height: 30vh;
-    width: 30%;
-    background-color: black;
+.black-jack-dealer-hand {
+	position: absolute;
+	left: 30%;
+	top: 3%;
+	height: 30vh;
+	width: 30%;
+	background-color: black;
+}
+/*5% is for split normally it's 27.5*/
+.black-jack-player-hand {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: 27.5%;
+	top: 45%;
+	height: 20vh;
+	width: 37%;
+}
+.black-jack-player-hand2 {
+	position: absolute;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	left: 50%;
+	top: 45%;
+	height: 20vh;
+	width: 37%;
+}
+.poker-card-back {
+	position: absolute;
+	left: 15%;
+	top: 5%;
+	height: 190px;
+	width: 150px;
 }
 
-.poker-card-back{
-    position: absolute;
-    left: 20%;
-    top: 27.5%;
-    height: 150px;
-    width: 150px;
-}
-.playing-cards{
-
-}

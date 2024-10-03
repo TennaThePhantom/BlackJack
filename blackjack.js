@@ -25,15 +25,35 @@ export const playerBankAccount = {
 		this.betAmount = 0;
 	},
 };
+
+
 const hitButton = document.createElement("button");
 const standButton = document.createElement("button");
 const doubleButton = document.createElement("button");
 const splitButton = document.createElement("button");
 const blackJackCardDeck = pokerCards.cardDeck;
 const playerHandContainer = document.createElement("div");
+const playerHandContainer2 = document.createElement("div");
+
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img")
-
+const playerHand = {
+	cardsAmount: 0,
+	cardsTotal: 0,
+	playerHand: [],
+	split: false,
+	double: false,
+	stand: false,
+	
+	playerCard(cardSrc){
+		const imageElement = document.createElement("img")
+		imageElement.src = cardSrc;
+		imageElement.style.width = "125px"
+		imageElement.style.height = "125px"
+		imageElement.style.zIndex = "2"
+		return imageElement
+	}
+}
 blackJackCardDeck.getCards();
 
 export function chips() {
@@ -136,8 +156,10 @@ export function playerMoney() {
 
 export function BlackJackHitButton() {
 	hitButton.addEventListener("click", function () {
-		let randomCard = blackJackCardDeck.getRandomCard();
-		let cardSrc = randomCard.src;
+		const randomCard = blackJackCardDeck.getRandomCard();
+		const cardSrc = randomCard.src;
+		const pokerCardImage = playerHand.playerCard(cardSrc);
+		playerHandContainer.append(pokerCardImage)
 		console.log(randomCard);
 		console.log(cardSrc);
 	});
@@ -147,8 +169,9 @@ export function cardsHands(){
 	deckOfCards.classList.add("poker-card-back")
 	deckOfCards.src = "images/Regular-Game-Cards/pokercard-back.png"
 	playerHandContainer.classList.add("black-jack-player-hand");
+	playerHandContainer2.classList.add("black-jack-player-hand2")
 	dealerHandContainer.classList.add("black-jack-dealer-hand");
-	document.body.append(playerHandContainer, dealerHandContainer, deckOfCards)
+	document.body.append(playerHandContainer, playerHandContainer2, dealerHandContainer, deckOfCards)
 	
 }
 
