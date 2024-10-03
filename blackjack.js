@@ -41,9 +41,11 @@ const playerHand = {
 		imageElement.style.zIndex = "2";
 		return imageElement;
 	},
-	playerCardNumber(){
-
-	}
+	playerCardNumber(pokerCard) {
+		const value = pokerCard.value;
+		this.cardsTotal += value;
+		return this.playerCardNumber;
+	},
 };
 
 const hitButton = document.createElement("button");
@@ -57,7 +59,7 @@ const playerHandContainer2 = document.createElement("div");
 const playerHandNumber = document.createElement("div");
 playerHandNumber.classList.add("player-card-number");
 document.body.append(playerHandNumber);
-playerHandNumber.innerHTML = `${playerHand.cardsTotal}`
+playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
@@ -162,13 +164,36 @@ export function playerMoney() {
 
 export function BlackJackHitButton() {
 	hitButton.addEventListener("click", function () {
-		playerHandNumber.style.display = "block"
+		playerHandNumber.style.display = "block";
 		const randomCard = blackJackCardDeck.getRandomCard();
 		const cardSrc = randomCard.src;
 		const pokerCardImage = playerHand.playerCard(cardSrc);
 		playerHandContainer.append(pokerCardImage);
+
+		let cardValue = randomCard.value;
+		const cardName = randomCard.name;
+
 		console.log(randomCard);
 		console.log(cardSrc);
+		console.log(cardValue);
+		console.log(cardName);
+
+		if (cardName === "ace") {
+			if (playerHand.cardsTotal < 12) {
+				cardValue = 11;
+				playerHand.cardsTotal += cardValue;
+				playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
+			} else if (playerHand.cardsTotal >= 12) {
+				cardValue = 1;
+				playerHand.cardsTotal += cardValue;
+				playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
+			}
+		}
+		else{
+			playerHand.cardsTotal += cardValue;
+			playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
+		}
+		console.log("Cards Total " + playerHand.cardsTotal);
 	});
 }
 

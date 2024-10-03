@@ -62,7 +62,7 @@ export const cardDeck = {
 				suit: "clubs",
 				name: "ace",
 				src: "images/Regular-Game-Cards/ace_of_clubs.png",
-				value: [1, 11],
+				value: 11,
 			},
 			{
 				suit: "clubs",
@@ -140,7 +140,7 @@ export const cardDeck = {
 				suit: "diamonds",
 				name: "ace",
 				src: "images/Regular-Game-Cards/ace_of_diamonds.png",
-				value: [1, 11],
+				value: 11,
 			},
 			{
 				suit: "diamonds",
@@ -218,7 +218,7 @@ export const cardDeck = {
 				suit: "hearts",
 				name: "ace",
 				src: "images/Regular-Game-Cards/ace_of_hearts.png",
-				value: [1, 11],
+				value: 11,
 			},
 			{
 				suit: "hearts",
@@ -296,7 +296,7 @@ export const cardDeck = {
 				suit: "spades",
 				name: "ace",
 				src: "images/Regular-Game-Cards/ace_of_spades.png",
-				value: [1, 11],
+				value: 11,
 			},
 			{
 				suit: "spades",
