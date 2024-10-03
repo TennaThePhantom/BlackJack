@@ -25,18 +25,6 @@ export const playerBankAccount = {
 		this.betAmount = 0;
 	},
 };
-
-const hitButton = document.createElement("button");
-const standButton = document.createElement("button");
-const doubleButton = document.createElement("button");
-const splitButton = document.createElement("button");
-const buttons = [hitButton, standButton, doubleButton, splitButton];
-const blackJackCardDeck = pokerCards.cardDeck;
-const playerHandContainer = document.createElement("div");
-const playerHandContainer2 = document.createElement("div");
-
-const dealerHandContainer = document.createElement("div");
-const deckOfCards = document.createElement("img");
 const playerHand = {
 	cardsAmount: 0,
 	cardsTotal: 0,
@@ -53,7 +41,26 @@ const playerHand = {
 		imageElement.style.zIndex = "2";
 		return imageElement;
 	},
+	playerCardNumber(){
+
+	}
 };
+
+const hitButton = document.createElement("button");
+const standButton = document.createElement("button");
+const doubleButton = document.createElement("button");
+const splitButton = document.createElement("button");
+const buttons = [hitButton, standButton, doubleButton, splitButton];
+const blackJackCardDeck = pokerCards.cardDeck;
+const playerHandContainer = document.createElement("div");
+const playerHandContainer2 = document.createElement("div");
+const playerHandNumber = document.createElement("div");
+playerHandNumber.classList.add("player-card-number");
+document.body.append(playerHandNumber);
+playerHandNumber.innerHTML = `${playerHand.cardsTotal}`
+
+const dealerHandContainer = document.createElement("div");
+const deckOfCards = document.createElement("img");
 blackJackCardDeck.getCards();
 
 export function chips() {
@@ -155,6 +162,7 @@ export function playerMoney() {
 
 export function BlackJackHitButton() {
 	hitButton.addEventListener("click", function () {
+		playerHandNumber.style.display = "block"
 		const randomCard = blackJackCardDeck.getRandomCard();
 		const cardSrc = randomCard.src;
 		const pokerCardImage = playerHand.playerCard(cardSrc);

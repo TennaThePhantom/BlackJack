@@ -99,4 +99,18 @@
 	height: 190px;
 	width: 150px;
 }
+.player-card-number{
+    position: absolute;
+    display: none;
+    height: 50px;
+    width: 50px;
+    left: 20%;
+    bottom: 30.5%;
+    border-radius: 10px;
+    left: 44.5%;
+    background-color: black;
+    z-index: 4;
+    color: white;
+    font-size: 2rem;
 
+}
