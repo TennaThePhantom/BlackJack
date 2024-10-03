@@ -26,17 +26,17 @@ export const playerBankAccount = {
 	},
 };
 
-
 const hitButton = document.createElement("button");
 const standButton = document.createElement("button");
 const doubleButton = document.createElement("button");
 const splitButton = document.createElement("button");
+const buttons = [hitButton, standButton, doubleButton, splitButton];
 const blackJackCardDeck = pokerCards.cardDeck;
 const playerHandContainer = document.createElement("div");
 const playerHandContainer2 = document.createElement("div");
 
 const dealerHandContainer = document.createElement("div");
-const deckOfCards = document.createElement("img")
+const deckOfCards = document.createElement("img");
 const playerHand = {
 	cardsAmount: 0,
 	cardsTotal: 0,
@@ -44,16 +44,16 @@ const playerHand = {
 	split: false,
 	double: false,
 	stand: false,
-	
-	playerCard(cardSrc){
-		const imageElement = document.createElement("img")
+
+	playerCard(cardSrc) {
+		const imageElement = document.createElement("img");
 		imageElement.src = cardSrc;
-		imageElement.style.width = "125px"
-		imageElement.style.height = "125px"
-		imageElement.style.zIndex = "2"
-		return imageElement
-	}
-}
+		imageElement.style.width = "125px";
+		imageElement.style.height = "125px";
+		imageElement.style.zIndex = "2";
+		return imageElement;
+	},
+};
 blackJackCardDeck.getCards();
 
 export function chips() {
@@ -121,7 +121,6 @@ export function chips() {
 export function pokerButtons() {
 	const blackJackGameButtonContainer = document.createElement("div");
 	blackJackGameButtonContainer.classList.add("blackjack-buttons-container");
-	const buttons = [hitButton, standButton, doubleButton, splitButton];
 	hitButton.id = "hit";
 	standButton.id = "stand";
 	splitButton.id = "split";
@@ -159,20 +158,32 @@ export function BlackJackHitButton() {
 		const randomCard = blackJackCardDeck.getRandomCard();
 		const cardSrc = randomCard.src;
 		const pokerCardImage = playerHand.playerCard(cardSrc);
-		playerHandContainer.append(pokerCardImage)
+		playerHandContainer.append(pokerCardImage);
 		console.log(randomCard);
 		console.log(cardSrc);
 	});
 }
 
-export function cardsHands(){
-	deckOfCards.classList.add("poker-card-back")
-	deckOfCards.src = "images/Regular-Game-Cards/pokercard-back.png"
+export function BlackJackStandButton() {
+	standButton.addEventListener("click", function () {
+		buttons.forEach((button) => {
+			button.style.display = "none";
+		});
+	});
+}
+
+export function cardsHands() {
+	deckOfCards.classList.add("poker-card-back");
+	deckOfCards.src = "images/Regular-Game-Cards/pokercard-back.png";
 	playerHandContainer.classList.add("black-jack-player-hand");
-	playerHandContainer2.classList.add("black-jack-player-hand2")
+	playerHandContainer2.classList.add("black-jack-player-hand2");
 	dealerHandContainer.classList.add("black-jack-dealer-hand");
-	document.body.append(playerHandContainer, playerHandContainer2, dealerHandContainer, deckOfCards)
-	
+	document.body.append(
+		playerHandContainer,
+		playerHandContainer2,
+		dealerHandContainer,
+		deckOfCards
+	);
 }
 
 export * from "./blackjack.js";

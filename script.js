@@ -1,6 +1,7 @@
 // main javascript code the home page
 import {
 	BlackJackHitButton,
+	BlackJackStandButton,
 	cardsHands,
 	chips,
 	playerBankAccount,
@@ -174,9 +175,9 @@ function BlackJackGame() {
 	pokerButtons();
 	playerMoney();
 	cardsHands();
-	setTimeout(() => {
-		BlackJackHitButton();
-	}, 1000);
+	BlackJackHitButton();
+	BlackJackStandButton();
+
 }
 
 moneyButton1.addEventListener("click", function () {
