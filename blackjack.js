@@ -188,8 +188,7 @@ export function BlackJackHitButton() {
 				playerHand.cardsTotal += cardValue;
 				playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 			}
-		}
-		else{
+		} else {
 			playerHand.cardsTotal += cardValue;
 			playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 		}
@@ -203,6 +202,12 @@ export function BlackJackStandButton() {
 			button.style.display = "none";
 		});
 	});
+}
+export function BlackJackPlayerFirstTwoCards() {
+	hitButton.click();
+	setTimeout(() => {
+		hitButton.click();
+	}, 3000);
 }
 
 export function cardsHands() {
