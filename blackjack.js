@@ -28,10 +28,12 @@ export const playerBankAccount = {
 const playerHand = {
 	cardsAmount: 0,
 	cardsTotal: 0,
-	playerHand: [],
+	playerCards: [],
 	split: false,
 	double: false,
 	stand: false,
+	aceAdjusted: false, 
+
 
 	playerCard(cardSrc) {
 		const imageElement = document.createElement("img");
@@ -46,6 +48,14 @@ const playerHand = {
 		this.cardsTotal += value;
 		return this.playerCardNumber;
 	},
+
+	adjustAceValue() {		
+		// Check if there is an ace in hand and if the total exceeds 21
+		if (this.playerCards.includes("ace") && this.cardsTotal > 21 && !this.aceAdjusted) {
+			this.cardsTotal -= 10; // Change value of ace from 11 to 1
+			this.aceAdjusted = true; // Set flag to prevent further adjustments
+		}
+	}
 };
 
 const hitButton = document.createElement("button");
@@ -172,12 +182,7 @@ export function BlackJackHitButton() {
 
 		let cardValue = randomCard.value;
 		const cardName = randomCard.name;
-
-		console.log(randomCard);
-		console.log(cardSrc);
-		console.log(cardValue);
-		console.log(cardName);
-
+		playerHand.playerCards.push(cardName);
 		if (cardName === "ace") {
 			if (playerHand.cardsTotal < 12) {
 				cardValue = 11;
@@ -192,7 +197,10 @@ export function BlackJackHitButton() {
 			playerHand.cardsTotal += cardValue;
 			playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 		}
-		console.log("Cards Total " + playerHand.cardsTotal);
+		playerHand.adjustAceValue()
+		playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
+
+
 	});
 }
 
@@ -207,6 +215,9 @@ export function BlackJackPlayerFirstTwoCards() {
 	hitButton.click();
 	setTimeout(() => {
 		hitButton.click();
+		playerHand.adjustAceValue();
+		playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
+
 	}, 3000);
 }
 
