@@ -319,12 +319,7 @@ export const cardDeck = {
 		];
 		this.copyDeck = [...this.cards];
 	},
-	drawCardRandomlyPlayer: function () {},
-    drawCardRandomlyDealer: function () {},
 
-	drawTwoCardsRandomlyDealer: function () {},
-
-    drawTwoCardsRandomlyPlayer: function () {},
 	getRandomCard: function (){
 		const randomIndex = Math.floor(Math.random() * this.cards.length);
         return this.cards[randomIndex]; // Return the card at the random index
