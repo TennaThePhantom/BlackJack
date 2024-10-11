@@ -2,6 +2,7 @@ export const cardDeck = {
 	cards: [],
 	usedCards: [],
 	copyDeck: [],
+	randomIndex: 0,
 	getCards: function () {
 		this.cards = [
 			{
@@ -320,13 +321,24 @@ export const cardDeck = {
 		this.copyDeck = [...this.cards];
 	},
 
-	getRandomCard: function (){
-		const randomIndex = Math.floor(Math.random() * this.cards.length);
-        return this.cards[randomIndex]; // Return the card at the random index
-	},
+	updateRandomIndex: function () {
+        this.randomIndex = Math.floor(Math.random() * this.cards.length);
+    },
 
-	restDeck: function () {
-        this.cards = this.copyDeck;
+    getRandomCard: function () {
+        this.updateRandomIndex(); // Update the random index
+        return this.cards[this.randomIndex]; // Return the card at the random index
+    },
+
+    removeRandomCard: function () {
+        const [removeRandomCard] = this.cards.splice(this.randomIndex, 1); // Use splice to remove the card
+        this.usedCards.push(removeRandomCard);
+        
+        return removeRandomCard;
+    },
+
+    resetDeck: function () {
+        this.cards = [...this.copyDeck];
     },
 };
 

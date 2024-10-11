@@ -74,6 +74,8 @@ playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
 blackJackCardDeck.getCards();
+console.log(blackJackCardDeck.cards)
+console.log(blackJackCardDeck.usedCards);
 
 export function chips() {
 	const chipsContainerSmallAmounts = document.createElement("div");
@@ -199,6 +201,12 @@ export function BlackJackHitButton() {
 		}
 		playerHand.adjustAceValue()
 		playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
+
+		blackJackCardDeck.removeRandomCard()
+		console.log("Black Jack Used cards ")
+		console.log(blackJackCardDeck.usedCards)
+		console.log("blackjack cards dealer")
+		console.log(blackJackCardDeck.cards.length);
 
 
 	});
