@@ -3,6 +3,82 @@ export const cardDeck = {
 	usedCards: [],
 	copyDeck: [],
 	randomIndex: 0,
+	splitCards: function () {
+		this.cards = [
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "2",
+				src: "images/Regular-Game-Cards/2_of_clubs.png",
+				value: 2,
+			},
+			{
+				suit: "clubs",
+				name: "3",
+				src: "images/Regular-Game-Cards/3_of_clubs.png",
+				value: 3,
+			},
+			{
+				suit: "clubs",
+				name: "3",
+				src: "images/Regular-Game-Cards/3_of_clubs.png",
+				value: 3,
+			},
+			{
+				suit: "clubs",
+				name: "3",
+				src: "images/Regular-Game-Cards/3_of_clubs.png",
+				value: 3,
+			},
+			{
+				suit: "clubs",
+				name: "3",
+				src: "images/Regular-Game-Cards/3_of_clubs.png",
+				value: 3,
+			},
+		];
+	},
 	getCards: function () {
 		this.cards = [
 			{
@@ -322,24 +398,24 @@ export const cardDeck = {
 	},
 
 	updateRandomIndex: function () {
-        this.randomIndex = Math.floor(Math.random() * this.cards.length);
-    },
+		this.randomIndex = Math.floor(Math.random() * this.cards.length);
+	},
 
-    getRandomCard: function () {
-        this.updateRandomIndex(); // Update the random index
-        return this.cards[this.randomIndex]; // Return the card at the random index
-    },
+	getRandomCard: function () {
+		this.updateRandomIndex(); // Update the random index
+		return this.cards[this.randomIndex]; // Return the card at the random index
+	},
 
-    removeRandomCard: function () {
-        const [removeRandomCard] = this.cards.splice(this.randomIndex, 1); // Use splice to remove the card
-        this.usedCards.push(removeRandomCard);
-        
-        return removeRandomCard;
-    },
+	removeRandomCard: function () {
+		const [removeRandomCard] = this.cards.splice(this.randomIndex, 1); // Use splice to remove the card
+		this.usedCards.push(removeRandomCard);
 
-    resetDeck: function () {
-        this.cards = [...this.copyDeck];
-    },
+		return removeRandomCard;
+	},
+
+	resetDeck: function () {
+		this.cards = [...this.copyDeck];
+	},
 };
 
 export * from "./cards.js";

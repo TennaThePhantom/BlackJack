@@ -99,12 +99,12 @@
 	height: 190px;
 	width: 150px;
 }
+/*orginal is 44.5% split is 22%*/
 .player-card-number{
     position: absolute;
     display: none;
     height: 50px;
     width: 50px;
-    left: 20%;
     bottom: 30.5%;
     border-radius: 10px;
     left: 44.5%;
@@ -112,5 +112,21 @@
     z-index: 4;
     color: white;
     font-size: 2rem;
+}
+
+
+.player-card-number2{
+    position: absolute;
+    display: block;
+    height: 50px;
+    width: 50px;
+    bottom: 30.5%;
+    border-radius: 10px;
+    left: 67%;
+    background-color: black;
+    z-index: 4;
+    color: white;
+    font-size: 2rem;
 
 }
+
