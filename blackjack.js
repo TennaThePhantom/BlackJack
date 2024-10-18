@@ -45,6 +45,7 @@ const playerHand = {
 	previousHand: 0,
 	firstCard: 0,
 	secondCard: 0,
+	dealerTwoNewCards: 0,
 
 	playerCard(cardSrc) {
 		const imageElement = document.createElement("img");
@@ -334,38 +335,70 @@ splitButton.addEventListener("click", function () {
 		playerHand.cardsTotal = 0;
 		playerHandNumber.innerHTML = `${(playerHand.cardsTotalHandSplit1 =
 			playerHand.firstCard)}`;
-		playerHandNumber2.innerHTML = `${
-			playerHand.cardsTotalHandSplit2 = playerHand.secondCard
-		}`;
+		playerHandNumber2.innerHTML = `${(playerHand.cardsTotalHandSplit2 =
+			playerHand.secondCard)}`;
 	}
+	dealTwoCards();
 });
+function dealTwoCards(){
+	setTimeout(() => {
+		hitSplitButton.click()
+	}, 1500);
+	setTimeout(() => {
+		hitSplitButton.click();
+	}, 3500);
+}
+
 hitSplitButton.addEventListener("click", function () {
 	if (playerHand.previousHand != 1) {
+		playerHand.dealerTwoNewCards += 1;
 		const randomCard = blackJackCardDeck.getRandomCard();
 		const cardSrc = randomCard.src;
 		const pokerCardImage = playerHand.playerCard(cardSrc);
-		playerHandContainer.append(pokerCardImage);
-
 		let cardValue = randomCard.value;
 		const cardName = randomCard.name;
-		playerHand.playerCardsFirstHand.push(cardName);
-		playerHand.playerCardsFirstHandValue.push(cardValue);
-		if (cardName === "ace") {
-			if (playerHand.cardsTotalHandSplit1 < 12) {
-				cardValue = 11;
-				playerHand.cardsTotalHandSplit1 += cardValue;
-				playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
-			} else if (playerHand.cardsTotalHandSplit1 >= 12) {
-				cardValue = 1;
+
+		if (playerHand.dealerTwoNewCards === 2) {
+			playerHandContainer2.append(pokerCardImage);
+			playerHand.playerCardsSecondHand.push(cardName);
+			playerHand.playerCardsSecondHandValue.push(cardValue);
+			if (cardName === "ace") {
+				if (playerHand.cardsTotalHandSplit2 < 12) {
+					cardValue = 11;
+					playerHand.cardsTotalHandSplit2 += cardValue;
+					playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
+				} else if (playerHand.cardsTotalHandSplit2 >= 12) {
+					cardValue = 1;
+					playerHand.cardsTotalHandSplit2 += cardValue;
+					playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
+				}
+			} else {
+				playerHand.cardsTotalHandSplit2 += cardValue;
+				playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
+			}
+			playerHand.adjustAceValue();
+			playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
+		} else {
+			playerHandContainer.append(pokerCardImage);
+			playerHand.playerCardsFirstHand.push(cardName);
+			playerHand.playerCardsFirstHandValue.push(cardValue);
+			if (cardName === "ace") {
+				if (playerHand.cardsTotalHandSplit1 < 12) {
+					cardValue = 11;
+					playerHand.cardsTotalHandSplit1 += cardValue;
+					playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
+				} else if (playerHand.cardsTotalHandSplit1 >= 12) {
+					cardValue = 1;
+					playerHand.cardsTotalHandSplit1 += cardValue;
+					playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
+				}
+			} else {
 				playerHand.cardsTotalHandSplit1 += cardValue;
 				playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 			}
-		} else {
-			playerHand.cardsTotalHandSplit1 += cardValue;
+			playerHand.adjustAceValue();
 			playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 		}
-		playerHand.adjustAceValue();
-		playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 
 		blackJackCardDeck.removeRandomCard();
 		console.log("Black Jack Used cards ");
@@ -427,4 +460,5 @@ standSplitButton.addEventListener("click", function () {
 		});
 	}
 });
+
 export * from "./blackjack.js";
