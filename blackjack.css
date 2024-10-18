@@ -65,10 +65,13 @@
 
 .black-jack-dealer-hand {
 	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	left: 30%;
 	top: 3%;
 	height: 30vh;
-	width: 30%;
+	width: 38%;
 	background-color: black;
 }
 /*5% is for split normally it's 27.5*/

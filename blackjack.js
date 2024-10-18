@@ -45,7 +45,7 @@ const playerHand = {
 	previousHand: 0,
 	firstCard: 0,
 	secondCard: 0,
-	dealerTwoNewCards: 0,
+	dealTwoNewCards: 0,
 
 	playerCard(cardSrc) {
 		const imageElement = document.createElement("img");
@@ -76,7 +76,8 @@ const playerHand = {
 	canThePlayerSplit() {
 		if (this.firstCard === this.secondCard && this.playerCards.length === 2) {
 			this.split = true;
-		} else if (this.playerCards.length >= 3) {
+		}
+		if (this.playerCards.length >= 3) {
 			this.split = false;
 		}
 	},
@@ -86,6 +87,28 @@ const playerHand = {
 		this.playerCardsSecondHand.push(this.playerCards[1]);
 		this.playerCards.slice(0, 1);
 		this.playerCards.slice(1, 1);
+	},
+};
+
+const dealerHand = {
+	cardsAmount: 0,
+	cardsTotal: 0,
+	dealerCards: [],
+	dealerCardsValue: [],
+	firstCard: 0,
+	secondCard: 0,
+	dealerCard(cardSrc) {
+		const imageElement = document.createElement("img");
+		imageElement.src = cardSrc;
+		imageElement.style.width = "125px";
+		imageElement.style.height = "125px";
+		imageElement.style.zIndex = "2";
+		return imageElement;
+	},
+	dealerCardNumber(pokerCard) {
+		const value = pokerCard.value;
+		this.cardsTotal += value;
+		return this.playerCardNumber;
 	},
 };
 const blackJackGameButtonContainer = document.createElement("div");
@@ -337,12 +360,12 @@ splitButton.addEventListener("click", function () {
 			playerHand.firstCard)}`;
 		playerHandNumber2.innerHTML = `${(playerHand.cardsTotalHandSplit2 =
 			playerHand.secondCard)}`;
+		dealTwoCardsSplit();
 	}
-	dealTwoCards();
 });
-function dealTwoCards(){
+function dealTwoCardsSplit() {
 	setTimeout(() => {
-		hitSplitButton.click()
+		hitSplitButton.click();
 	}, 1500);
 	setTimeout(() => {
 		hitSplitButton.click();
@@ -351,14 +374,14 @@ function dealTwoCards(){
 
 hitSplitButton.addEventListener("click", function () {
 	if (playerHand.previousHand != 1) {
-		playerHand.dealerTwoNewCards += 1;
+		playerHand.dealTwoNewCards += 1;
 		const randomCard = blackJackCardDeck.getRandomCard();
 		const cardSrc = randomCard.src;
 		const pokerCardImage = playerHand.playerCard(cardSrc);
 		let cardValue = randomCard.value;
 		const cardName = randomCard.name;
 
-		if (playerHand.dealerTwoNewCards === 2) {
+		if (playerHand.dealTwoNewCards === 2) {
 			playerHandContainer2.append(pokerCardImage);
 			playerHand.playerCardsSecondHand.push(cardName);
 			playerHand.playerCardsSecondHandValue.push(cardValue);
@@ -460,5 +483,20 @@ standSplitButton.addEventListener("click", function () {
 		});
 	}
 });
+
+function dealerGetTwoCards() {
+	const randomCard = blackJackCardDeck.getRandomCard();
+	const cardSrc = randomCard.src;
+	const pokerCardImage = playerHand.playerCard(cardSrc);
+	let cardValue = randomCard.value;
+	const cardName = randomCard.name;
+
+	dealerHand.dealerCards.push(cardName);
+	dealerHand.dealerCardsValue.push(cardValue);
+
+	
+
+
+}
 
 export * from "./blackjack.js";
