@@ -119,6 +119,10 @@ const splitButton = document.createElement("button");
 const hitSplitButton = document.createElement("button");
 const standSplitButton = document.createElement("button");
 const doubleSplitButton = document.createElement("button");
+const dealerHitButton = document.createElement("button");
+dealerHitButton.disabled = false;
+dealerHitButton.style.display = "none";
+document.body.append(dealerHitButton);
 const buttons = [hitButton, standButton, doubleButton, splitButton];
 const splitButtons = [hitSplitButton, standSplitButton, doubleSplitButton];
 const blackJackCardDeck = pokerCards.cardDeck;
@@ -126,10 +130,13 @@ const playerHandContainer = document.createElement("div");
 const playerHandContainer2 = document.createElement("div");
 const playerHandNumber = document.createElement("div");
 const playerHandNumber2 = document.createElement("div");
+const dealerHandNumber = document.createElement("div");
 playerHandNumber.classList.add("player-card-number");
 playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 playerHandNumber2.classList.add("player-card-number2");
 playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
+dealerHandNumber.classList.add("dealer-hand-number");
+dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
@@ -295,6 +302,13 @@ export function BlackJackHitButton() {
 
 export function BlackJackStandButton() {
 	standButton.addEventListener("click", function () {
+		dealerHitButton.click();
+		setTimeout(() => {
+			dealerHitButton.click();
+		}, 1000);
+		setTimeout(() => {
+			dealerHitButton.click();
+		}, 3000);
 		buttons.forEach((button) => {
 			button.style.display = "none";
 		});
@@ -302,7 +316,7 @@ export function BlackJackStandButton() {
 }
 export function BlackJackPlayerFirstTwoCards() {
 	hitButton.click();
-	document.body.append(playerHandNumber);
+	document.body.append(playerHandNumber, dealerHandNumber);
 
 	playerHand.firstCard = playerHand.playerCardsValue[0];
 	console.log(playerHand.firstCard);
@@ -484,19 +498,38 @@ standSplitButton.addEventListener("click", function () {
 	}
 });
 
-function dealerGetTwoCards() {
+dealerHitButton.addEventListener("click", function () {
 	const randomCard = blackJackCardDeck.getRandomCard();
 	const cardSrc = randomCard.src;
-	const pokerCardImage = playerHand.playerCard(cardSrc);
+	const pokerCardImage = dealerHand.dealerCard(cardSrc);
 	let cardValue = randomCard.value;
 	const cardName = randomCard.name;
+	dealerHandContainer.append(pokerCardImage);
 
 	dealerHand.dealerCards.push(cardName);
 	dealerHand.dealerCardsValue.push(cardValue);
+	if (cardName === "ace") {
+		if (dealerHand.cardsTotal < 21) {
+			cardValue = 11;
+			dealerHand.cardsTotal += cardValue;
+			dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
+		} else if (playerHand.cardsTotal >= 22) {
+			cardValue = 1;
+			dealerHand.cardsTotal += cardValue;
+			dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
+		}
+	} else {
+		dealerHand.cardsTotal += cardValue;
+		dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
+	}
+	// playerHand.adjustAceValue();
+	dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 
-	
-
-
-}
+	blackJackCardDeck.removeRandomCard();
+	console.log("Black Jack Used cards ");
+	console.log(blackJackCardDeck.usedCards);
+	console.log("blackjack cards dealer");
+	console.log(blackJackCardDeck.cards.length);
+});
 
 export * from "./blackjack.js";
