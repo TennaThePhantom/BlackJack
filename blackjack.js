@@ -97,6 +97,8 @@ const dealerHand = {
 	dealerCardsValue: [],
 	firstCard: 0,
 	secondCard: 0,
+	aceAdjusted: false,
+
 	dealerCard(cardSrc) {
 		const imageElement = document.createElement("img");
 		imageElement.src = cardSrc;
@@ -108,7 +110,18 @@ const dealerHand = {
 	dealerCardNumber(pokerCard) {
 		const value = pokerCard.value;
 		this.cardsTotal += value;
-		return this.playerCardNumber;
+		return this.dealerCardNumber;
+	},
+	adjustAceValue() {
+		// Check if there is an ace in hand and if the total exceeds 21
+		if (
+			this.dealerCards.includes("ace") &&
+			this.cardsTotal > 21 &&
+			!this.aceAdjusted
+		) {
+			this.cardsTotal -= 10; // Change value of ace from 11 to 1
+			this.aceAdjusted = true; // Set flag to prevent further adjustments
+		}
 	},
 };
 const blackJackGameButtonContainer = document.createElement("div");
@@ -509,11 +522,11 @@ dealerHitButton.addEventListener("click", function () {
 	dealerHand.dealerCards.push(cardName);
 	dealerHand.dealerCardsValue.push(cardValue);
 	if (cardName === "ace") {
-		if (dealerHand.cardsTotal < 21) {
+		if (dealerHand.cardsTotal < 12) {
 			cardValue = 11;
 			dealerHand.cardsTotal += cardValue;
 			dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
-		} else if (playerHand.cardsTotal >= 22) {
+		} else if (dealerHand.cardsTotal >= 12) {
 			cardValue = 1;
 			dealerHand.cardsTotal += cardValue;
 			dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
@@ -522,7 +535,7 @@ dealerHitButton.addEventListener("click", function () {
 		dealerHand.cardsTotal += cardValue;
 		dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 	}
-	// playerHand.adjustAceValue();
+	dealerHand.adjustAceValue();
 	dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 
 	blackJackCardDeck.removeRandomCard();
