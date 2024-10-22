@@ -41,6 +41,8 @@ const playerHand = {
 	double: false,
 	stand: false,
 	aceAdjusted: false,
+	aceAdjustedSplit1: false,
+	aceAdjustedSplit2: false,
 	switchToNextHand: false,
 	previousHand: 0,
 	firstCard: 0,
@@ -72,6 +74,29 @@ const playerHand = {
 			this.aceAdjusted = true; // Set flag to prevent further adjustments
 		}
 	},
+	adjustAceValueSplit1() {
+		// Check if there is an ace in hand and if the total exceeds 21
+		if (
+			this.playerCardsFirstHand.includes("ace") &&
+			this.cardsTotalHandSplit1 > 21 &&
+			!this.aceAdjustedSplit1
+		) {
+			this.cardsTotalHandSplit1 -= 10; // Change value of ace from 11 to 1
+			this.aceAdjustedSplit1 = true; // Set flag to prevent further adjustments
+		}
+	},
+	adjustAceValueSplit2() {
+		// Check if there is an ace in hand and if the total exceeds 21
+		if (
+			this.playerCardsSecondHand.includes("ace") &&
+			this.cardsTotalHandSplit2 > 21 &&
+			!this.aceAdjustedSplit2
+		) {
+			this.cardsTotalHandSplit2 -= 10; // Change value of ace from 11 to 1
+			this.aceAdjustedSplit2 = true; // Set flag to prevent further adjustments
+		}
+	},
+	
 
 	canThePlayerSplit() {
 		if (this.firstCard === this.secondCard && this.playerCards.length === 2) {
@@ -426,7 +451,7 @@ hitSplitButton.addEventListener("click", function () {
 				playerHand.cardsTotalHandSplit2 += cardValue;
 				playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 			}
-			playerHand.adjustAceValue();
+			playerHand.adjustAceValueSplit2();
 			playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 		} else {
 			playerHandContainer.append(pokerCardImage);
@@ -446,7 +471,7 @@ hitSplitButton.addEventListener("click", function () {
 				playerHand.cardsTotalHandSplit1 += cardValue;
 				playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 			}
-			playerHand.adjustAceValue();
+			playerHand.adjustAceValueSplit1();
 			playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 		}
 
