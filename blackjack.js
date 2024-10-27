@@ -96,7 +96,6 @@ const playerHand = {
 			this.aceAdjustedSplit2 = true; // Set flag to prevent further adjustments
 		}
 	},
-	
 
 	canThePlayerSplit() {
 		if (this.firstCard === this.secondCard && this.playerCards.length === 2) {
@@ -178,7 +177,7 @@ dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
-blackJackCardDeck.splitCards();
+blackJackCardDeck.getCards();
 console.log(blackJackCardDeck.cards);
 console.log(blackJackCardDeck.usedCards);
 
@@ -341,11 +340,14 @@ export function BlackJackHitButton() {
 export function BlackJackStandButton() {
 	standButton.addEventListener("click", function () {
 		dealerHitButton.click();
-		setTimeout(() => {
-			dealerHitButton.click();
-		}, 1000);
-		setTimeout(() => {
-			dealerHitButton.click();
+		console.log("Dealer Hand total is " + dealerHand.cardsTotal);
+		const dealerHit = setInterval(() => {
+			if (dealerHand.cardsTotal <= 21) {
+				dealerHitButton.click();
+			}
+			if (dealerHand.cardsTotal >= 17) {
+				clearInterval(dealerHit);
+			}
 		}, 3000);
 		buttons.forEach((button) => {
 			button.style.display = "none";
