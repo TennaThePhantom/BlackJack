@@ -80,8 +80,8 @@ function moneySlider() {
 	slider.classList.add("slider");
 	slider.setAttribute("type", "range");
 	slider.setAttribute("min", "25");
-	slider.setAttribute("max", "100000");
-	slider.setAttribute("value", "50000");
+	slider.setAttribute("max", "50000");
+	slider.setAttribute("value", "25000");
 	slider.setAttribute("class", "slider");
 	slider.setAttribute("id", "myRange");
 	moneySliderContainer.append(slider);
@@ -173,12 +173,12 @@ customMoney.addEventListener("click", function () {
 
 function BlackJackGame() {
 	chips();
-	pokerButtons();
-	playerMoney();
-	cardsHands();
-	BlackJackHitButton();
-	BlackJackPlayerFirstTwoCards();
-	BlackJackStandButton();
+	// pokerButtons();
+	 playerMoney();
+	//cardsHands();
+	//BlackJackHitButton();
+	//BlackJackPlayerFirstTwoCards();
+	//BlackJackStandButton();
 
 }
 

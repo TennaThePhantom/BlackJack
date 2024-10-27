@@ -3,7 +3,7 @@
 	width: 100%;
 	position: absolute;
 	top: 65%;
-	display: none;
+	display: flex;
 	justify-content: space-between;
 }
 
@@ -12,7 +12,7 @@
 	width: 100%;
 	position: absolute;
 	top: 80%;
-	display: none;
+	display: flex;
 	justify-content: space-evenly;
 }
 

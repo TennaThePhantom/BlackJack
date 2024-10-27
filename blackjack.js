@@ -189,33 +189,22 @@ export function chips() {
 	const oneDollarChip = document.createElement("div");
 	const fiveDollarChip = document.createElement("div");
 	const tenDollarChip = document.createElement("div");
-	const twentyFiveDollarChip = document.createElement("div");
 	const fiftyDollarChip = document.createElement("div");
 	const oneHundredDollarChip = document.createElement("div");
-	const TwoHundredFiftyDollarChip = document.createElement("div");
-	const fiveHundredDollarChip = document.createElement("div");
 	const thousandDollarChip = document.createElement("div");
 	const fiveThousandDollarChip = document.createElement("div");
 	const tenThousandDollarChip = document.createElement("div");
-	const twentyFiveThousandDollarChip = document.createElement("div");
-	const FiftyThousandDollarChip = document.createElement("div");
-
 	const moneyChipsSmallAmounts = [
 		oneDollarChip,
 		fiveDollarChip,
 		tenDollarChip,
-		twentyFiveDollarChip,
 		fiftyDollarChip,
 		oneHundredDollarChip,
-		TwoHundredFiftyDollarChip,
-		fiveHundredDollarChip,
 		thousandDollarChip,
 	];
 	const moneyChipsHighAmounts = [
 		fiveThousandDollarChip,
 		tenThousandDollarChip,
-		twentyFiveThousandDollarChip,
-		FiftyThousandDollarChip,
 	];
 
 	moneyChipsSmallAmounts.forEach((chip) => {
@@ -229,16 +218,11 @@ export function chips() {
 	oneDollarChip.classList.add("white");
 	fiveDollarChip.classList.add("red");
 	tenDollarChip.classList.add("blue");
-	twentyFiveDollarChip.classList.add("green");
 	fiftyDollarChip.classList.add("yellow");
 	oneHundredDollarChip.classList.add("black");
-	TwoHundredFiftyDollarChip.classList.add("purple");
-	fiveHundredDollarChip.classList.add("orange");
 	thousandDollarChip.classList.add("teal");
 	fiveThousandDollarChip.classList.add("tealgreen");
 	tenThousandDollarChip.classList.add("bronze");
-	twentyFiveThousandDollarChip.classList.add("silver");
-	FiftyThousandDollarChip.classList.add("gold");
 
 	document.body.append(chipsContainerSmallAmounts, chipsContainerHighAmounts);
 }
