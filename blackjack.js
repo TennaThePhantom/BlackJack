@@ -273,14 +273,19 @@ function pokerSplitButtons() {
 
 export function playerMoney() {
 	const playerMoneyContainer = document.createElement("div");
+	const playerMoneyContainer2 = document.createElement("div");
 	const playerMoneyText = document.createElement("p");
+	const playerBetAmountText = document.createElement("p")
 	playerMoneyText.classList.add("player-bank");
+	playerBetAmountText.classList.add("player-bank")
 	playerMoneyContainer.classList.add("player-bank-container");
+	playerMoneyContainer2.classList.add("player-bank-container2")
 	playerMoneyText.innerHTML = `Money: ${playerBankAccount.getStartingValue()}`;
-
+	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.playerBetting()}`
 	playerMoneyContainer.append(playerMoneyText);
+	playerMoneyContainer2.append(playerBetAmountText)
 
-	document.body.append(playerMoneyContainer);
+	document.body.append(playerMoneyContainer, playerMoneyContainer2);
 }
 
 export function BlackJackHitButton() {
