@@ -5,6 +5,7 @@
 	top: 65%;
 	display: flex;
 	justify-content: space-between;
+	cursor: pointer;
 }
 
 .chips-container-high-rollers {
@@ -14,6 +15,7 @@
 	top: 80%;
 	display: flex;
 	justify-content: space-evenly;
+	cursor: pointer;
 }
 
 .poker-button {

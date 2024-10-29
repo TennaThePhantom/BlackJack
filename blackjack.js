@@ -14,7 +14,12 @@ export const playerBankAccount = {
 	},
 
 	updateBetAmount(bet) {
-		this.betAmount += bet;
+		if (this.playerMoney >= this.betAmount + bet) {
+			this.betAmount += bet;
+			return this.betAmount;
+		} else {
+			return this.betAmount; // Return current bet amount without updating
+		}
 	},
 
 	playerBetting() {
@@ -174,6 +179,7 @@ playerHandNumber2.classList.add("player-card-number2");
 playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 dealerHandNumber.classList.add("dealer-hand-number");
 dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
+const playerBetAmountText = document.createElement("p");
 
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
@@ -187,13 +193,25 @@ export function chips() {
 	chipsContainerSmallAmounts.classList.add("chips-container-small-rollers");
 	chipsContainerHighAmounts.classList.add("chips-container-high-rollers");
 	const oneDollarChip = document.createElement("div");
+	oneDollarChip.setAttribute("data-value", "1");
 	const fiveDollarChip = document.createElement("div");
+	fiveDollarChip.setAttribute("data-value", "5");
 	const tenDollarChip = document.createElement("div");
+	tenDollarChip.setAttribute("data-value", "10");
 	const fiftyDollarChip = document.createElement("div");
+	fiftyDollarChip.setAttribute("data-value", "50");
 	const oneHundredDollarChip = document.createElement("div");
+	oneHundredDollarChip.setAttribute("data-value", "100");
+
 	const thousandDollarChip = document.createElement("div");
+	thousandDollarChip.setAttribute("data-value", "1000");
+
 	const fiveThousandDollarChip = document.createElement("div");
+	fiveThousandDollarChip.setAttribute("data-value", "5000");
+
 	const tenThousandDollarChip = document.createElement("div");
+	tenThousandDollarChip.setAttribute("data-value", "10000");
+
 	const moneyChipsSmallAmounts = [
 		oneDollarChip,
 		fiveDollarChip,
@@ -202,18 +220,27 @@ export function chips() {
 		oneHundredDollarChip,
 		thousandDollarChip,
 	];
-	const moneyChipsHighAmounts = [
-		fiveThousandDollarChip,
-		tenThousandDollarChip,
-	];
+	const moneyChipsHighAmounts = [fiveThousandDollarChip, tenThousandDollarChip];
 
 	moneyChipsSmallAmounts.forEach((chip) => {
 		chipsContainerSmallAmounts.append(chip);
 		chip.classList.add("pokerchip");
+		chip.addEventListener("click", function () {
+			let chipValue = parseInt(chip.getAttribute("data-value"), 10);
+			playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.updateBetAmount(
+				chipValue
+			)}`;
+		});
 	});
 	moneyChipsHighAmounts.forEach((chip) => {
 		chipsContainerHighAmounts.append(chip);
 		chip.classList.add("pokerchip");
+		chip.addEventListener("click", function () {
+			let chipValue = parseInt(chip.getAttribute("data-value"), 10);
+			playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.updateBetAmount(
+				chipValue
+			)}`;
+		});
 	});
 	oneDollarChip.classList.add("white");
 	fiveDollarChip.classList.add("red");
@@ -275,15 +302,14 @@ export function playerMoney() {
 	const playerMoneyContainer = document.createElement("div");
 	const playerMoneyContainer2 = document.createElement("div");
 	const playerMoneyText = document.createElement("p");
-	const playerBetAmountText = document.createElement("p")
 	playerMoneyText.classList.add("player-bank");
-	playerBetAmountText.classList.add("player-bank")
+	playerBetAmountText.classList.add("player-bank");
 	playerMoneyContainer.classList.add("player-bank-container");
-	playerMoneyContainer2.classList.add("player-bank-container2")
+	playerMoneyContainer2.classList.add("player-bank-container2");
 	playerMoneyText.innerHTML = `Money: ${playerBankAccount.getStartingValue()}`;
-	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.playerBetting()}`
+	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.playerBetting()}`;
 	playerMoneyContainer.append(playerMoneyText);
-	playerMoneyContainer2.append(playerBetAmountText)
+	playerMoneyContainer2.append(playerBetAmountText);
 
 	document.body.append(playerMoneyContainer, playerMoneyContainer2);
 }
