@@ -28,6 +28,7 @@ export const playerBankAccount = {
 
 	resetBetAmount() {
 		this.betAmount = 0;
+		return this.betAmount;
 	},
 };
 const playerHand = {
@@ -183,9 +184,12 @@ const playerBetAmountText = document.createElement("p");
 
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
+const resetBet = document.createElement("button");
+const confirmButton = document.createElement("button")
 blackJackCardDeck.getCards();
 console.log(blackJackCardDeck.cards);
 console.log(blackJackCardDeck.usedCards);
+
 
 export function chips() {
 	const chipsContainerSmallAmounts = document.createElement("div");
@@ -301,18 +305,28 @@ function pokerSplitButtons() {
 export function playerMoney() {
 	const playerMoneyContainer = document.createElement("div");
 	const playerMoneyContainer2 = document.createElement("div");
+	const buttonsContainer = document.createElement("div")
+	resetBet.textContent = "Rest Bet Amount"
+	confirmButton.textContent = "Confirm Bet"
 	const playerMoneyText = document.createElement("p");
 	playerMoneyText.classList.add("player-bank");
 	playerBetAmountText.classList.add("player-bank");
 	playerMoneyContainer.classList.add("player-bank-container");
 	playerMoneyContainer2.classList.add("player-bank-container2");
+	buttonsContainer.classList.add("chips-button-container")
 	playerMoneyText.innerHTML = `Money: ${playerBankAccount.getStartingValue()}`;
 	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.playerBetting()}`;
 	playerMoneyContainer.append(playerMoneyText);
 	playerMoneyContainer2.append(playerBetAmountText);
+	buttonsContainer.append(resetBet,confirmButton)
 
-	document.body.append(playerMoneyContainer, playerMoneyContainer2);
+	document.body.append(playerMoneyContainer, playerMoneyContainer2, buttonsContainer);
 }
+resetBet.addEventListener("click", function(){
+	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.resetBetAmount()}`
+})
+
+
 
 export function BlackJackHitButton() {
 	hitButton.addEventListener("click", function () {
