@@ -173,12 +173,7 @@ customMoney.addEventListener("click", function () {
 
 function BlackJackGame() {
 	chips();
-	// pokerButtons();
-	 playerMoney();
-	//cardsHands();
-	//BlackJackHitButton();
-	//BlackJackPlayerFirstTwoCards();
-	//BlackJackStandButton();
+	playerMoney();
 
 }
 

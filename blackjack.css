@@ -164,3 +164,24 @@
     font-size: 2rem;
 	z-index: 5;
 }
+
+
+.game-screen{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60vh;
+	left: 25%;
+	top: 20%;
+	width: 50%;
+	opacity: 1;
+	background-color: gray;
+	color: black;
+	z-index: 10;
+	border-radius: 5px;
+}
+
+.game-screen button{
+	margin: 35px;
+}

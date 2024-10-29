@@ -154,6 +154,13 @@ const dealerHand = {
 		}
 	},
 };
+
+const dealerAndPlayerGameWinner = {
+	playerWon: null,
+	dealerWon: null,
+	playerWentOver21: null,
+	dealerWentOver21: null,
+};
 const blackJackGameButtonContainer = document.createElement("div");
 const hitButton = document.createElement("button");
 const standButton = document.createElement("button");
@@ -182,18 +189,17 @@ dealerHandNumber.classList.add("dealer-hand-number");
 dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 const playerBetAmountText = document.createElement("p");
 
+const chipsContainerSmallAmounts = document.createElement("div");
+const chipsContainerHighAmounts = document.createElement("div");
 const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
 const resetBet = document.createElement("button");
-const confirmButton = document.createElement("button")
+const confirmButton = document.createElement("button");
 blackJackCardDeck.getCards();
 console.log(blackJackCardDeck.cards);
 console.log(blackJackCardDeck.usedCards);
 
-
 export function chips() {
-	const chipsContainerSmallAmounts = document.createElement("div");
-	const chipsContainerHighAmounts = document.createElement("div");
 	chipsContainerSmallAmounts.classList.add("chips-container-small-rollers");
 	chipsContainerHighAmounts.classList.add("chips-container-high-rollers");
 	const oneDollarChip = document.createElement("div");
@@ -305,28 +311,44 @@ function pokerSplitButtons() {
 export function playerMoney() {
 	const playerMoneyContainer = document.createElement("div");
 	const playerMoneyContainer2 = document.createElement("div");
-	const buttonsContainer = document.createElement("div")
-	resetBet.textContent = "Rest Bet Amount"
-	confirmButton.textContent = "Confirm Bet"
+	const buttonsContainer = document.createElement("div");
+	resetBet.textContent = "Rest Bet Amount";
+	confirmButton.textContent = "Confirm Bet";
 	const playerMoneyText = document.createElement("p");
 	playerMoneyText.classList.add("player-bank");
 	playerBetAmountText.classList.add("player-bank");
 	playerMoneyContainer.classList.add("player-bank-container");
 	playerMoneyContainer2.classList.add("player-bank-container2");
-	buttonsContainer.classList.add("chips-button-container")
+	buttonsContainer.classList.add("chips-button-container");
 	playerMoneyText.innerHTML = `Money: ${playerBankAccount.getStartingValue()}`;
 	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.playerBetting()}`;
 	playerMoneyContainer.append(playerMoneyText);
 	playerMoneyContainer2.append(playerBetAmountText);
-	buttonsContainer.append(resetBet,confirmButton)
+	buttonsContainer.append(resetBet, confirmButton);
 
-	document.body.append(playerMoneyContainer, playerMoneyContainer2, buttonsContainer);
+	document.body.append(
+		playerMoneyContainer,
+		playerMoneyContainer2,
+		buttonsContainer
+	);
 }
-resetBet.addEventListener("click", function(){
-	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.resetBetAmount()}`
-})
+resetBet.addEventListener("click", function () {
+	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.resetBetAmount()}`;
+});
 
-
+confirmButton.addEventListener("click", function () {
+	if (playerBankAccount.betAmount >= 1) {
+		chipsContainerSmallAmounts.style.display = "none";
+		chipsContainerHighAmounts.style.display = "none";
+		confirmButton.style.display = "none";
+		resetBet.style.display = "none";
+		pokerButtons();
+		cardsHands();
+		BlackJackHitButton();
+		BlackJackPlayerFirstTwoCards();
+		BlackJackStandButton();
+	}
+});
 
 export function BlackJackHitButton() {
 	hitButton.addEventListener("click", function () {
@@ -376,6 +398,8 @@ export function BlackJackStandButton() {
 			}
 			if (dealerHand.cardsTotal >= 17) {
 				clearInterval(dealerHit);
+				whoWins();
+				popUpHandOverScreen();
 			}
 		}, 3000);
 		buttons.forEach((button) => {
@@ -600,5 +624,61 @@ dealerHitButton.addEventListener("click", function () {
 	console.log("blackjack cards dealer");
 	console.log(blackJackCardDeck.cards.length);
 });
+
+function whoWins() {
+	const playerOver21 = playerHand.cardsTotal > 21;
+	const dealerOver21 = dealerHand.cardsTotal > 21;
+
+	if (playerOver21 && dealerOver21) {
+		console.log("Both players went over 21 - no winner");
+		dealerAndPlayerGameWinner.playerWon = false;
+		dealerAndPlayerGameWinner.dealerWon = false;
+		return;
+	}
+
+	if (playerOver21) {
+		console.log("Player has over 21 and loses");
+		dealerAndPlayerGameWinner.dealerWon = true;
+		dealerAndPlayerGameWinner.playerWentOver21 = true;
+		return;
+	}
+
+	if (dealerOver21) {
+		console.log("Dealer has over 21 and loses - player wins");
+		dealerAndPlayerGameWinner.playerWon = true;
+		dealerAndPlayerGameWinner.dealerWentOver21 = true;
+		return;
+	}
+
+	if (playerHand.cardsTotal > dealerHand.cardsTotal) {
+		console.log("Player hand is higher than dealer - player wins");
+		dealerAndPlayerGameWinner.playerWon = true;
+	} else if (dealerHand.cardsTotal > playerHand.cardsTotal) {
+		console.log("Dealer hand is higher than player - dealer wins");
+		dealerAndPlayerGameWinner.dealerWon = true;
+	} else {
+		console.log("It's a tie");
+		dealerAndPlayerGameWinner.playerWon = false;
+		dealerAndPlayerGameWinner.dealerWon = false;
+	}
+}
+
+
+function popUpHandOverScreen(){
+	const gameScreen = document.createElement("div")
+	gameScreen.classList.add("game-screen")
+	const text = document.createElement("p");
+	const gameButton = document.createElement("button")
+	const gameButton2 = document.createElement("button")
+	gameButton.textContent = "Quit"
+	gameButton2.textContent = "Play Again"
+	if(dealerAndPlayerGameWinner.playerWon = true || dealerAndPlayerGameWinner.dealerWon === true){
+	}
+
+
+	gameScreen.append(text, gameButton, gameButton2)
+
+	document.body.append(gameScreen)
+}
 
 export * from "./blackjack.js";
