@@ -6,6 +6,7 @@
 	background-color: #014d43;
 	box-shadow: 0 0 0 5px #282828 inset, 0 0 0 10px #969696 inset,
 		0 0 6px rgba(255, 255, 255, 0.2);
+
 }
 .pokerchip {
 	transform: scale(0.6); /* Shrinks the element to 80% of its size */
@@ -16,6 +17,8 @@
 	height: 151px;
 	box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5), 0 0 3px 0 rgba(0, 0, 0, 0.4) inset;
 	border-radius: 50%;
+	cursor: pointer;
+
 }
 .pokerchip:before {
 	position: absolute;
@@ -46,6 +49,44 @@
 }
 
 /* Colors */
+.orange {
+	background-image: linear-gradient(
+			0deg,
+			transparent 0,
+			transparent 67.5px,
+			#fff 67.5px,
+			#fff 83.5px,
+			transparent 83.5px,
+			transparent 151px
+		),
+		linear-gradient(
+			60deg,
+			transparent 0,
+			transparent 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			transparent 113.4304px,
+			transparent 151px
+		),
+		linear-gradient(
+			120deg,
+			#ff8c00 0,
+			#ff8c00 97.4304px,
+			#fff 97.4304px,
+			#fff 113.4304px,
+			#ff8c00 113.4304px,
+			#ff8c00 151px
+		);
+}
+.orange:before {
+	border: 8px solid #ff8c00;
+}
+.orange:after {
+	content: "0.25";
+	background: #ff8c00;
+	color: #cc7a00;
+}
+
 .white {
 	background-image: linear-gradient(
 			0deg,
@@ -631,44 +672,7 @@
 	color: #6c006c;
 }
 
-/* $500 Chip - Orange */
-.orange {
-	background-image: linear-gradient(
-			0deg,
-			transparent 0,
-			transparent 67.5px,
-			#fff 67.5px,
-			#fff 83.5px,
-			transparent 83.5px,
-			transparent 151px
-		),
-		linear-gradient(
-			60deg,
-			transparent 0,
-			transparent 97.4304px,
-			#fff 97.4304px,
-			#fff 113.4304px,
-			transparent 113.4304px,
-			transparent 151px
-		),
-		linear-gradient(
-			120deg,
-			#ff8c00 0,
-			#ff8c00 97.4304px,
-			#fff 97.4304px,
-			#fff 113.4304px,
-			#ff8c00 113.4304px,
-			#ff8c00 151px
-		);
-}
-.orange:before {
-	border: 8px solid #ff8c00;
-}
-.orange:after {
-	content: "500";
-	background: #ff8c00;
-	color: #cc7a00;
-}
+
 
 .teal {
 	background-image: linear-gradient(
