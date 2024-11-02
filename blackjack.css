@@ -151,7 +151,7 @@
 
 .dealer-hand-number{
     position: absolute;
-    display: block;
+    display: none;
     height: 50px;
     width: 50px;
     top: 32.5%;

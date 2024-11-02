@@ -76,37 +76,32 @@ const playerHand = {
 	},
 
 	adjustAceValue() {
-		// Check if there is an ace in hand and if the total exceeds 21
-		if (
-			this.playerCards.includes("ace") &&
-			this.cardsTotal > 21 &&
-			!this.aceAdjusted
-		) {
-			this.cardsTotal -= 10; // Change value of ace from 11 to 1
-			this.aceAdjusted = true; // Set flag to prevent further adjustments
+		if (this.aceAdjusted) return false; // Prevent re-adjustment
+	
+		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
+			this.cardsTotal -= 10;
+			this.aceAdjusted = true;
 		}
+		return this.aceAdjusted;
 	},
+	
 	adjustAceValueSplit1() {
-		// Check if there is an ace in hand and if the total exceeds 21
-		if (
-			this.playerCardsFirstHand.includes("ace") &&
-			this.cardsTotalHandSplit1 > 21 &&
-			!this.aceAdjustedSplit1
-		) {
-			this.cardsTotalHandSplit1 -= 10; // Change value of ace from 11 to 1
-			this.aceAdjustedSplit1 = true; // Set flag to prevent further adjustments
+		if (this.aceAdjusted) return false; // Prevent re-adjustment
+	
+		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
+			this.cardsTotal -= 10;
+			this.aceAdjusted = true;
 		}
+		return this.aceAdjusted;
 	},
 	adjustAceValueSplit2() {
-		// Check if there is an ace in hand and if the total exceeds 21
-		if (
-			this.playerCardsSecondHand.includes("ace") &&
-			this.cardsTotalHandSplit2 > 21 &&
-			!this.aceAdjustedSplit2
-		) {
-			this.cardsTotalHandSplit2 -= 10; // Change value of ace from 11 to 1
-			this.aceAdjustedSplit2 = true; // Set flag to prevent further adjustments
+		if (this.aceAdjusted) return false; // Prevent re-adjustment
+	
+		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
+			this.cardsTotal -= 10;
+			this.aceAdjusted = true;
 		}
+		return this.aceAdjusted;
 	},
 
 	canThePlayerSplit() {
@@ -176,15 +171,13 @@ const dealerHand = {
 		return this.dealerCardNumber;
 	},
 	adjustAceValue() {
-		// Check if there is an ace in hand and if the total exceeds 21
-		if (
-			this.dealerCards.includes("ace") &&
-			this.cardsTotal > 21 &&
-			!this.aceAdjusted
-		) {
-			this.cardsTotal -= 10; // Change value of ace from 11 to 1
-			this.aceAdjusted = true; // Set flag to prevent further adjustments
+		if (this.aceAdjusted) return false; // Prevent re-adjustment
+	
+		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
+			this.cardsTotal -= 10;
+			this.aceAdjusted = true;
 		}
+		return this.aceAdjusted;
 	},
 
 	resetToNextGame() {
@@ -413,6 +406,7 @@ function confirmButtonHandler() {
 		BlackJackHitButton();
 		BlackJackPlayerFirstTwoCards();
 		BlackJackStandButton();
+		dealerTurnedToHit();
 	}
 }
 
@@ -461,7 +455,6 @@ export function BlackJackHitButton() {
 }
 
 function blackJackStandButtonHandler() {
-	dealerHitButton.click();
 	console.log("Dealer Hand total is " + dealerHand.cardsTotal);
 	const dealerHit = setInterval(() => {
 		if (dealerHand.cardsTotal <= 21) {
@@ -487,7 +480,9 @@ export function BlackJackStandButton() {
 
 export function BlackJackPlayerFirstTwoCards() {
 	hitButton.click();
-
+	setTimeout(() => {
+		dealerHitButton.click();
+	}, 500);
 	document.body.append(playerHandNumber, dealerHandNumber);
 
 	playerHand.firstCard = playerHand.playerCardsValue[0];
@@ -505,7 +500,6 @@ export function BlackJackPlayerFirstTwoCards() {
 }
 
 export function cardsHands() {
-	dealerHandNumber.style.display = "block";
 	playerHandContainer.style.display = "flex";
 	deckOfCards.style.display = "block";
 	dealerHandContainer.style.display = "flex";
@@ -679,6 +673,7 @@ function standSplitButtonHandler() {
 standSplitButton.addEventListener("click", standSplitButtonHandler);
 
 function dealerHitButtonHandler() {
+	dealerHandNumber.style.display = "block";
 	const randomCard = blackJackCardDeck.getRandomCard();
 	const cardSrc = randomCard.src;
 	const pokerCardImage = dealerHand.dealerCard(cardSrc);
@@ -711,18 +706,14 @@ function dealerHitButtonHandler() {
 	console.log("blackjack cards dealer");
 	console.log(blackJackCardDeck.cards.length);
 }
-dealerHitButton.addEventListener("click", dealerHitButtonHandler);
+
+function dealerTurnedToHit() {
+	dealerHitButton.addEventListener("click", dealerHitButtonHandler);
+}
 
 function whoWins() {
 	const playerOver21 = playerHand.cardsTotal > 21;
 	const dealerOver21 = dealerHand.cardsTotal > 21;
-
-	if (playerOver21 && dealerOver21) {
-		console.log("Both players went over 21 - no winner");
-		dealerAndPlayerGameWinner.playerWon = false;
-		dealerAndPlayerGameWinner.dealerWon = false;
-		return;
-	}
 
 	if (playerOver21) {
 		console.log("Player has over 21 and loses");
@@ -744,6 +735,10 @@ function whoWins() {
 	} else if (dealerHand.cardsTotal > playerHand.cardsTotal) {
 		console.log("Dealer hand is higher than player - dealer wins");
 		dealerAndPlayerGameWinner.dealerWon = true;
+	} else if (playerOver21 && dealerOver21) {
+		console.log("dealer went over 21 player too but player still loses");
+		dealerAndPlayerGameWinner.dealerWon = true;
+		dealerAndPlayerGameWinner.playerWentOver21 = true;
 	} else {
 		console.log("It's a tie");
 		dealerAndPlayerGameWinner.playerWon = false;
@@ -779,13 +774,15 @@ function popUpHandOverScreen() {
 		playerNewMoney = playerBank + earnings;
 		text.textContent = `You Won ${earnings}$`;
 		gameTextInfo.textContent = `Current Balance ${[playerNewMoney]}`;
-	}
-	if (dealerAndPlayerGameWinner.dealerWon === true) {
+	} else if (dealerAndPlayerGameWinner.dealerWon === true) {
 		playerNewMoney = playerBank - playerBankAccount.betAmount;
 		text.textContent = `You lose ${playerBankAccount.betAmount}$`;
 		gameTextInfo.textContent = `Current Balance ${playerNewMoney}`;
-	}
-	if (
+	} else if (dealerAndPlayerGameWinner.playerWentOver21 === true) {
+		playerNewMoney = playerBank - playerBankAccount.betAmount;
+		text.textContent = `You lose ${playerBankAccount.betAmount}$`;
+		gameTextInfo.textContent = `Current Balance ${playerNewMoney}`;
+	} else if (
 		dealerAndPlayerGameWinner.playerWon === false &&
 		dealerAndPlayerGameWinner.dealerWon === false
 	) {
@@ -810,6 +807,10 @@ function popUpHandOverScreen() {
 		dealerAndPlayerGameWinner.resetToNextGame();
 		chips();
 		playerMoney();
+		if (blackJackCardDeck.usedCards.length >= 38) {
+			blackJackCardDeck.resetDeck();
+			blackJackCardDeck.usedCards = [];
+		}
 	});
 
 	gameScreen.append(text, gameTextInfo, gameButton, gameButton2);
