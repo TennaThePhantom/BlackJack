@@ -148,8 +148,10 @@ function customMoneyPage() {
 		yesButton.addEventListener("click", function () {
 			confirmPopUpBox.style.display = "none";
 			moneySliderContainer.style.display = "none";
-			playerBankAccount.updatePlayerMoney(slider.value);
+			let sliderValue = parseFloat(slider.value);
+			playerBankAccount.updatePlayerMoney(sliderValue);
 			goBackArrowIcon2.style.display = "none";
+			BlackJackGame();
 		});
 	});
 }
