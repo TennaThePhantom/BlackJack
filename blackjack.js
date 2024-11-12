@@ -4,6 +4,7 @@ import * as pokerCards from "./cards.js";
 export const playerBankAccount = {
 	playerMoney: 0,
 	betAmount: 0,
+	originalBet: 0,
 
 	updatePlayerMoney(money) {
 		this.playerMoney += money;
@@ -53,8 +54,11 @@ const playerHand = {
 	double: false,
 	stand: false,
 	aceAdjusted: false,
+	aceAdjustedAgain: false,
 	aceAdjustedSplit1: false,
+	aceAdjustedSplit1Again: false,
 	aceAdjustedSplit2: false,
+	aceAdjustedSplit2Again: false,
 	switchToNextHand: false,
 	previousHand: 0,
 	firstCard: 0,
@@ -77,31 +81,77 @@ const playerHand = {
 
 	adjustAceValue() {
 		if (this.aceAdjusted) return false; // Prevent re-adjustment
-	
+
 		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
 			this.cardsTotal -= 10;
 			this.aceAdjusted = true;
 		}
 		return this.aceAdjusted;
 	},
-	
-	adjustAceValueSplit1() {
-		if (this.aceAdjusted) return false; // Prevent re-adjustment
-	
-		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
+	adjustAceValueAgain() {
+		if (this.aceAdjustedAgain) return false; // Prevent re-adjustment
+
+		if (
+			this.playerCards.includes("ace") &&
+			this.cardsTotal > 21 &&
+			this.aceAdjusted === true
+		) {
 			this.cardsTotal -= 10;
-			this.aceAdjusted = true;
+			this.aceAdjustedAgain = true;
 		}
-		return this.aceAdjusted;
+		return this.aceAdjustedAgain;
+	},
+
+	adjustAceValueSplit1() {
+		if (this.aceAdjustedSplit1) return false; // Prevent re-adjustment
+
+		if (
+			this.playerCardsFirstHand.includes("ace") &&
+			this.cardsTotalHandSplit1 > 21
+		) {
+			this.cardsTotalHandSplit1 -= 10;
+			this.aceAdjustedSplit1 = true;
+		}
+		return this.aceAdjustedSplit1;
+	},
+
+	adjustAceValueSplit1Again() {
+		if (this.aceAdjustedSplit1Again) return false; // Prevent re-adjustment
+
+		if (
+			this.playerCardsFirstHand.includes("ace") &&
+			this.cardsTotalHandSplit1 > 21 &&
+			this.aceAdjustedSplit1 === true
+		) {
+			this.cardsTotalHandSplit1 -= 10;
+			this.aceAdjustedSplit1Again = true;
+		}
+		return this.aceAdjustedSplit1Again;
 	},
 	adjustAceValueSplit2() {
-		if (this.aceAdjusted) return false; // Prevent re-adjustment
-	
-		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
-			this.cardsTotal -= 10;
-			this.aceAdjusted = true;
+		if (this.aceAdjustedSplit2) return false; // Prevent re-adjustment
+
+		if (
+			this.playerCardsSecondHand.includes("ace") &&
+			this.cardsTotalHandSplit2 > 21
+		) {
+			this.cardsTotalHandSplit2 -= 10;
+			this.aceAdjustedSplit2 = true;
 		}
-		return this.aceAdjusted;
+		return this.aceAdjustedSplit2;
+	},
+	adjustAceValueSplit2Again() {
+		if (this.aceAdjustedSplit2Again) return false; // Prevent re-adjustment
+
+		if (
+			this.playerCardsSecondHand.includes("ace") &&
+			this.cardsTotalHandSplit2 > 21 &&
+			this.aceAdjustedSplit2 === true
+		) {
+			this.cardsTotalHandSplit2 -= 10;
+			this.aceAdjustedSplit2Again = true;
+		}
+		return this.aceAdjustedSplit2Again;
 	},
 
 	canThePlayerSplit() {
@@ -136,8 +186,11 @@ const playerHand = {
 		this.double = false;
 		this.stand = false;
 		this.aceAdjusted = false;
+		this.aceAdjustedAgain = false;
 		this.aceAdjustedSplit1 = false;
+		this.aceAdjustedSplit1Again = false;
 		this.aceAdjustedSplit2 = false;
+		this.aceAdjustedSplit2Again = false;
 		this.switchToNextHand = false;
 		this.previousHand = 0;
 		this.firstCard = 0;
@@ -172,8 +225,8 @@ const dealerHand = {
 	},
 	adjustAceValue() {
 		if (this.aceAdjusted) return false; // Prevent re-adjustment
-	
-		if (this.playerCards.includes("ace") && this.cardsTotal > 21) {
+
+		if (this.dealerCards.includes("ace") && this.cardsTotal > 21) {
 			this.cardsTotal -= 10;
 			this.aceAdjusted = true;
 		}
@@ -241,7 +294,7 @@ const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
 const resetBet = document.createElement("button");
 const confirmButton = document.createElement("button");
-blackJackCardDeck.getCards();
+blackJackCardDeck.splitCards();
 console.log(blackJackCardDeck.cards);
 console.log(blackJackCardDeck.usedCards);
 
@@ -397,6 +450,7 @@ resetBet.addEventListener("click", resetButtonHandler);
 
 function confirmButtonHandler() {
 	if (playerBankAccount.betAmount >= 0.01) {
+		playerBankAccount.originalBet = playerBankAccount.betAmount;
 		chipsContainerSmallAmounts.style.display = "none";
 		chipsContainerHighAmounts.style.display = "none";
 		confirmButton.style.display = "none";
@@ -404,9 +458,14 @@ function confirmButtonHandler() {
 		pokerButtons();
 		cardsHands();
 		BlackJackHitButton();
+		blackJackDoubleButton();
 		BlackJackPlayerFirstTwoCards();
 		BlackJackStandButton();
 		dealerTurnedToHit();
+		BlackJackSplitButton();
+		blackJackDoubleSplitButton();
+		BlackJackHitSplitButton();
+		BlackJackStandSplitButton();
 	}
 }
 
@@ -430,6 +489,7 @@ function hitButtonHandler() {
 			playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 		} else if (playerHand.cardsTotal >= 12) {
 			cardValue = 1;
+			playerHand.adjustAceValueAgain();
 			playerHand.cardsTotal += cardValue;
 			playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 		}
@@ -439,7 +499,17 @@ function hitButtonHandler() {
 	}
 	playerHand.adjustAceValue();
 	playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
-
+	if (playerHand.cardsTotal > 21) {
+		whoWins();
+		buttons.forEach((button) => {
+			button.style.display = "none";
+		});
+		setTimeout(() => {
+			hideGame();
+			popUpHandOverScreen();
+		}, 2000);
+	}
+	playerHand.canThePlayerSplit();
 	blackJackCardDeck.removeRandomCard();
 	console.log("black Jack current cards");
 	console.log(blackJackCardDeck.cards);
@@ -447,7 +517,6 @@ function hitButtonHandler() {
 	console.log(blackJackCardDeck.usedCards);
 	console.log("blackjack cards dealer");
 	console.log(blackJackCardDeck.cards.length);
-	playerHand.canThePlayerSplit();
 }
 
 export function BlackJackHitButton() {
@@ -478,7 +547,48 @@ export function BlackJackStandButton() {
 	standButton.addEventListener("click", blackJackStandButtonHandler);
 }
 
+function blackJackDoubleButtonHandler() {
+	const currentBet = playerBankAccount.betAmount;
+	const double = currentBet + currentBet;
+	if (playerBankAccount.betAmount * 2 > playerBankAccount.playerMoney) {
+		return null;
+	}
+	if (playerBankAccount.betAmount * 2 <= playerBankAccount.playerMoney) {
+		playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.updateBetAmount(
+			double - currentBet
+		)}`;
+		hitButton.click();
+		standButton.click();
+	}
+}
+function blackJackDoubleButton() {
+	doubleButton.addEventListener("click", blackJackDoubleButtonHandler);
+}
+
+function blackJackDoubleSplitButtonHandler() {
+	const currentBet = playerBankAccount.originalBet;
+	const double = currentBet + currentBet;
+	if (double > playerBankAccount.playerMoney) {
+		return null;
+	}
+	if (playerBankAccount.originalBet * 2 <= playerBankAccount.playerMoney) {
+		playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.updateBetAmount(
+			double - currentBet
+		)}`;
+		hitSplitButton.click();
+		standSplitButton.click();
+	}
+}
+function blackJackDoubleSplitButton() {
+	doubleSplitButton.addEventListener(
+		"click",
+		blackJackDoubleSplitButtonHandler
+	);
+}
+
 export function BlackJackPlayerFirstTwoCards() {
+	const currentBet = playerBankAccount.betAmount;
+	const double = currentBet + currentBet;
 	hitButton.click();
 	setTimeout(() => {
 		dealerHitButton.click();
@@ -493,7 +603,11 @@ export function BlackJackPlayerFirstTwoCards() {
 		playerHand.secondCard = playerHand.playerCardsValue[1];
 		console.log(playerHand.playerCardsValue[1]);
 		playerHand.adjustAceValue();
-		playerHand.canThePlayerSplit();
+		if (double <= playerBankAccount.playerMoney) {
+			playerHand.canThePlayerSplit();
+		} else {
+			return null;
+		}
 		console.log(playerHand.split);
 		playerHandNumber.innerHTML = `${playerHand.cardsTotal}`;
 	}, 3000);
@@ -547,9 +661,15 @@ function splitButtonHandler() {
 		dealTwoCardsSplit();
 	}
 }
-splitButton.addEventListener("click", splitButtonHandler);
-
+function BlackJackSplitButton() {
+	splitButton.addEventListener("click", splitButtonHandler);
+}
 function dealTwoCardsSplit() {
+	const currentBet = playerBankAccount.betAmount;
+	const double = currentBet + currentBet;
+	playerBetAmountText.innerHTML = `Bet: ${playerBankAccount.updateBetAmount(
+		double - currentBet
+	)}`;
 	setTimeout(() => {
 		hitSplitButton.click();
 	}, 1500);
@@ -598,6 +718,7 @@ function hitSplitButtonHandler() {
 					playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 				} else if (playerHand.cardsTotalHandSplit1 >= 12) {
 					cardValue = 1;
+					playerHand.adjustAceValueSplit1Again();
 					playerHand.cardsTotalHandSplit1 += cardValue;
 					playerHandNumber.innerHTML = `${playerHand.cardsTotalHandSplit1}`;
 				}
@@ -636,6 +757,7 @@ function hitSplitButtonHandler() {
 				playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 			} else if (playerHand.cardsTotalHandSplit2 >= 12) {
 				cardValue = 1;
+				playerHand.adjustAceValueSplit2Again();
 				playerHand.cardsTotalHandSplit2 += cardValue;
 				playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 			}
@@ -643,7 +765,7 @@ function hitSplitButtonHandler() {
 			playerHand.cardsTotalHandSplit2 += cardValue;
 			playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 		}
-		playerHand.adjustAceValue();
+		playerHand.adjustAceValueSplit2();
 		playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 
 		blackJackCardDeck.removeRandomCard();
@@ -658,7 +780,9 @@ function hitSplitButtonHandler() {
 		console.log(playerHand.playerCardsSecondHand);
 	}
 }
-hitSplitButton.addEventListener("click", hitSplitButtonHandler);
+function BlackJackHitSplitButton() {
+	hitSplitButton.addEventListener("click", hitSplitButtonHandler);
+}
 
 function standSplitButtonHandler() {
 	playerHand.switchToNextHand = true;
@@ -668,9 +792,24 @@ function standSplitButtonHandler() {
 		splitButtons.forEach((button) => {
 			button.style.display = "none";
 		});
+		const dealerHit = setInterval(() => {
+			if (dealerHand.cardsTotal <= 21) {
+				dealerHitButton.click();
+			}
+			if (dealerHand.cardsTotal >= 17) {
+				clearInterval(dealerHit);
+				whoWins();
+				setTimeout(() => {
+					hideGame();
+					popUpHandOverScreen();
+				}, 40000);
+			}
+		}, 3000);
 	}
 }
-standSplitButton.addEventListener("click", standSplitButtonHandler);
+function BlackJackStandSplitButton() {
+	standSplitButton.addEventListener("click", standSplitButtonHandler);
+}
 
 function dealerHitButtonHandler() {
 	dealerHandNumber.style.display = "block";
