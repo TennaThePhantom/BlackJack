@@ -303,8 +303,7 @@ const deckOfCards = document.createElement("img");
 const resetBet = document.createElement("button");
 const confirmButton = document.createElement("button");
 blackJackCardDeck.getCards();
-console.log(blackJackCardDeck.cards);
-console.log(blackJackCardDeck.usedCards);
+
 
 export function chips() {
 	chipsContainerSmallAmounts.style.display = "flex";
@@ -520,12 +519,6 @@ function hitButtonHandler() {
 	}
 	playerHand.canThePlayerSplit();
 	blackJackCardDeck.removeRandomCard();
-	console.log("black Jack current cards");
-	console.log(blackJackCardDeck.cards);
-	console.log("Black Jack Used cards ");
-	console.log(blackJackCardDeck.usedCards);
-	console.log("blackjack cards dealer");
-	console.log(blackJackCardDeck.cards.length);
 }
 
 export function BlackJackHitButton() {
@@ -655,11 +648,6 @@ function splitButtonHandler() {
 		playerHandContainer.style.left = "5%";
 		playerHandNumber.style.left = "22%";
 		playerHand.splitHand();
-		console.log("player first hand");
-		console.log(playerHand.playerCardsFirstHand);
-		console.log("player second hand");
-		console.log(playerHand.playerCardsSecondHand);
-
 		const images = playerHandContainer.getElementsByTagName("img");
 		if (images.length > 0) {
 			secondImage = playerHandContainer.removeChild(images[images.length - 1]);
@@ -743,15 +731,6 @@ function hitSplitButtonHandler() {
 		}
 
 		blackJackCardDeck.removeRandomCard();
-		console.log("Black Jack Used cards ");
-		console.log(blackJackCardDeck.usedCards);
-		console.log("blackjack cards dealer");
-		console.log(blackJackCardDeck.cards.length);
-
-		console.log("player split first hand");
-		console.log(playerHand.playerCardsFirstHand);
-		console.log("player second hand split");
-		console.log(playerHand.playerCardsSecondHand);
 	} else {
 		const randomCard = blackJackCardDeck.getRandomCard();
 		const cardSrc = randomCard.src;
@@ -781,15 +760,6 @@ function hitSplitButtonHandler() {
 		playerHandNumber2.innerHTML = `${playerHand.cardsTotalHandSplit2}`;
 
 		blackJackCardDeck.removeRandomCard();
-		console.log("Black Jack Used cards ");
-		console.log(blackJackCardDeck.usedCards);
-		console.log("blackjack cards dealer");
-		console.log(blackJackCardDeck.cards.length);
-
-		console.log("player split first hand");
-		console.log(playerHand.playerCardsFirstHand);
-		console.log("player second hand split");
-		console.log(playerHand.playerCardsSecondHand);
 	}
 }
 function BlackJackHitSplitButton() {
@@ -852,10 +822,6 @@ function dealerHitButtonHandler() {
 	dealerHandNumber.innerHTML = `${dealerHand.cardsTotal}`;
 
 	blackJackCardDeck.removeRandomCard();
-	console.log("Black Jack Used cards ");
-	console.log(blackJackCardDeck.usedCards);
-	console.log("blackjack cards dealer");
-	console.log(blackJackCardDeck.cards.length);
 }
 
 function dealerTurnedToHit() {
@@ -867,31 +833,25 @@ function whoWins() {
 	const dealerOver21 = dealerHand.cardsTotal > 21;
 
 	if (playerOver21) {
-		console.log("Player has over 21 and loses");
 		dealerAndPlayerGameWinner.dealerWon = true;
 		dealerAndPlayerGameWinner.playerWentOver21 = true;
 		return;
 	}
 
 	if (dealerOver21) {
-		console.log("Dealer has over 21 and loses - player wins");
 		dealerAndPlayerGameWinner.playerWon = true;
 		dealerAndPlayerGameWinner.dealerWentOver21 = true;
 		return;
 	}
 
 	if (playerHand.cardsTotal > dealerHand.cardsTotal) {
-		console.log("Player hand is higher than dealer - player wins");
 		dealerAndPlayerGameWinner.playerWon = true;
 	} else if (dealerHand.cardsTotal > playerHand.cardsTotal) {
-		console.log("Dealer hand is higher than player - dealer wins");
 		dealerAndPlayerGameWinner.dealerWon = true;
 	} else if (playerOver21 && dealerOver21) {
-		console.log("dealer went over 21 player too but player still loses");
 		dealerAndPlayerGameWinner.dealerWon = true;
 		dealerAndPlayerGameWinner.playerWentOver21 = true;
 	} else {
-		console.log("It's a tie");
 		dealerAndPlayerGameWinner.playerWon = false;
 		dealerAndPlayerGameWinner.dealerWon = false;
 	}
