@@ -92,7 +92,7 @@ const playerHand = {
 		if (this.aceAdjustedAgain) return false; // Prevent re-adjustment
 
 		if (
-			this.playerCards.includes("ace") &&
+			this.playerCards.filter(card => card === "ace") > 2 &&
 			this.cardsTotal > 21 &&
 			this.aceAdjusted === true
 		) {
@@ -247,13 +247,21 @@ const dealerHand = {
 
 const dealerAndPlayerGameWinner = {
 	playerWon: null,
+	playerFirstHandWon: null,
+	playerSecondHandWon: null,
 	dealerWon: null,
+	playerFirstHandWon: null,
+	playerSecondHandWon: null,
 	playerWentOver21: null,
 	dealerWentOver21: null,
 
 	resetToNextGame() {
 		this.playerWon = null;
+		this.playerFirstHandWon = null,
+		this.playerSecondHandWon = null;
 		this.dealerWon = null;
+		this.playerFirstHandWon = null;
+		this.playerSecondHandWon = null;
 		this.playerWentOver21 = null;
 		this.dealerWentOver21 = null;
 		return this;
@@ -294,7 +302,7 @@ const dealerHandContainer = document.createElement("div");
 const deckOfCards = document.createElement("img");
 const resetBet = document.createElement("button");
 const confirmButton = document.createElement("button");
-blackJackCardDeck.splitCards();
+blackJackCardDeck.getCards();
 console.log(blackJackCardDeck.cards);
 console.log(blackJackCardDeck.usedCards);
 
@@ -370,7 +378,6 @@ export function chips() {
 }
 
 export function pokerButtons() {
-	blackJackGameButtonContainer.style.display = "flex";
 	blackJackGameButtonContainer.classList.add("blackjack-buttons-container");
 	hitButton.id = "hit";
 	standButton.id = "stand";
@@ -383,6 +390,7 @@ export function pokerButtons() {
 	standButton.textContent = "Stand";
 	doubleButton.textContent = "Double";
 	splitButton.textContent = "Split";
+	blackJackGameButtonContainer.style.display = "flex";
 
 	buttons.forEach((button) => {
 		button.classList.add("poker-button");
@@ -406,7 +414,7 @@ function pokerSplitButtons() {
 	hitSplitButton.textContent = "Hit";
 	standSplitButton.textContent = "Stand";
 	doubleSplitButton.textContent = "Double";
-
+	blackJackGameButtonContainerSplit.style.display = "flex"
 	splitButtons.forEach((button) => {
 		button.classList.add("poker-button");
 		blackJackGameButtonContainerSplit.append(button);
@@ -473,6 +481,7 @@ confirmButton.addEventListener("click", confirmButtonHandler);
 
 function hitButtonHandler() {
 	playerHandNumber.style.display = "block";
+	playerHandNumber.style.left = "44.5%"
 	const randomCard = blackJackCardDeck.getRandomCard();
 	const cardSrc = randomCard.src;
 	const pokerCardImage = playerHand.playerCard(cardSrc);
@@ -615,6 +624,7 @@ export function BlackJackPlayerFirstTwoCards() {
 
 export function cardsHands() {
 	playerHandContainer.style.display = "flex";
+	playerHandContainer.style.left = "27.5%"
 	deckOfCards.style.display = "block";
 	dealerHandContainer.style.display = "flex";
 	deckOfCards.classList.add("poker-card-back");
@@ -637,6 +647,8 @@ function splitButtonHandler() {
 		blackJackGameButtonContainer.style.display = "none";
 		pokerSplitButtons();
 		let secondImage;
+		playerHandNumber2.style.display = "block"
+		playerHandNumber2.style.left = "67%"
 		document.body.append(playerHandNumber2);
 
 		playerHandContainer2.style.display = "flex";
@@ -798,11 +810,11 @@ function standSplitButtonHandler() {
 			}
 			if (dealerHand.cardsTotal >= 17) {
 				clearInterval(dealerHit);
-				whoWins();
+				splitWhoWins();
 				setTimeout(() => {
 					hideGame();
 					popUpHandOverScreen();
-				}, 40000);
+				}, 2000);
 			}
 		}, 3000);
 	}
@@ -885,6 +897,50 @@ function whoWins() {
 	}
 }
 
+function splitWhoWins(){
+	const playerFirstHandOver21 = playerHand.cardsTotalHandSplit1 > 21;
+	const playerSecondHandOver21 = playerHand.cardsTotalHandSplit2 > 21;
+	const dealerOver21 = dealerHand.cardsTotal > 21;
+
+	if(playerFirstHandOver21 && playerSecondHandOver21){
+		dealerAndPlayerGameWinner.dealerWon = true;
+		dealerAndPlayerGameWinner.playerWentOver21 = true;
+	}
+	if (dealerOver21) {
+		console.log("Dealer has over 21 and loses - player wins");
+		dealerAndPlayerGameWinner.playerWon = true;
+		dealerAndPlayerGameWinner.dealerWentOver21 = true;
+		return;
+	}
+	if(playerHand.cardsTotalHandSplit1 > dealerHand.cardsTotal && playerHand.cardsTotalHandSplit2 > dealerHand.cardsTotal){
+		dealerAndPlayerGameWinner.playerFirstHandWon = true;
+		dealerAndPlayerGameWinner.playerSecondHandWon = true;
+	} else if(playerHand.cardsTotalHandSplit1 > dealerHand.cardsTotal && playerHand.cardsTotalHandSplit2 < dealerHand.cardsTotal){
+		dealerAndPlayerGameWinner.playerFirstHandWon = true;
+		dealerAndPlayerGameWinner.playerSecondHandWon = false;
+	} else if(playerHand.cardsTotalHandSplit2 > dealerHand.cardsTotal && playerHand.cardsTotalHandSplit1 < dealerHand.cardsTotal){
+		dealerAndPlayerGameWinner.playerFirstHandWon = false;
+		dealerAndPlayerGameWinner.playerSecondHandWon = true;
+	}else if(playerFirstHandOver21 && playerHand.cardsTotalHandSplit2 > dealerHand.cardsTotal){
+		dealerAndPlayerGameWinner.playerFirstHandWon = false;
+		dealerAndPlayerGameWinner.playerSecondHandWon = true;
+		dealerAndPlayerGameWinner.dealerWon = true;
+	}else if(playerSecondHandOver21 && playerHand.cardsTotalHandSplit1 > dealerHand.cardsTotal){
+		dealerAndPlayerGameWinner.playerFirstHandWon = true;
+		dealerAndPlayerGameWinner.playerSecondHandWon = false;
+		dealerAndPlayerGameWinner.dealerWon = true;
+	}else if(playerFirstHandOver21 && playerSecondHandOver21 && dealerOver21){
+		dealerAndPlayerGameWinner.dealerWon = true;
+		dealerAndPlayerGameWinner.playerWentOver21 = true;
+	}else{
+		dealerAndPlayerGameWinner.playerFirstHandWon = false;
+		dealerAndPlayerGameWinner.playerSecondHandWon = false;
+		dealerAndPlayerGameWinner.dealerWon = false;
+	}
+
+
+
+}
 function hideGame() {
 	const divs = document.querySelectorAll("div");
 	const images = document.querySelectorAll("img");
@@ -925,6 +981,20 @@ function popUpHandOverScreen() {
 		dealerAndPlayerGameWinner.playerWon === false &&
 		dealerAndPlayerGameWinner.dealerWon === false
 	) {
+		text.textContent = "It's A Draw";
+	} else if(dealerAndPlayerGameWinner.playerFirstHandWon === true && dealerAndPlayerGameWinner.playerSecondHandWon === true){
+		playerNewMoney = playerBank + earnings;
+		text.textContent = `You Won ${earnings}$`;
+		gameTextInfo.textContent = `Current Balance ${[playerNewMoney]}`;
+	} else if(dealerAndPlayerGameWinner.playerFirstHandWon === true && dealerAndPlayerGameWinner.playerSecondHandWon === false){
+		playerNewMoney = playerBank + earnings - playerBankAccount.originalBet;
+		text.textContent = `You won ${playerBankAccount.betAmount}$`;
+		gameTextInfo.textContent = `Current Balance ${playerNewMoney}`;
+	} else if(dealerAndPlayerGameWinner.playerFirstHandWon === false && dealerAndPlayerGameWinner.playerSecondHandWon === true){
+		playerNewMoney = playerBank + earnings - playerBankAccount.originalBet;
+		text.textContent = `You won ${playerBankAccount.betAmount}$`;
+		gameTextInfo.textContent = `Current Balance ${playerNewMoney}`;
+	} else if(dealerAndPlayerGameWinner.playerFirstHandWon === false && dealerAndPlayerGameWinner.playerSecondHandWon === false && dealerAndPlayerGameWinner.dealerWon === false){
 		text.textContent = "It's A Draw";
 	}
 
